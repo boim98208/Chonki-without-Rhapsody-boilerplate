@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<samplemap CrossfadeGamma="1.0" ID="sus_string3" RRGroupAmount="4.0" MicPositions=";"
+           SaveMode="2">
+  <sample Root="67" LoKey="67" HiKey="68" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G3_RR2.wav"
+          Duplicate="1" SampleEnd="249783" MonolithOffset="0" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="67" LoKey="67" HiKey="68" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G3_RR1.wav"
+          Duplicate="1" SampleEnd="251476" MonolithOffset="249856" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="93" LoKey="91" HiKey="92" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G5_RR4.wav"
+          Duplicate="1" SampleEnd="251667" MonolithOffset="503808" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="91" LoKey="91" HiKey="92" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G5_RR3.wav"
+          Duplicate="1" SampleEnd="247375" MonolithOffset="757760" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="91" LoKey="91" HiKey="92" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G5_RR2.wav"
+          Duplicate="1" SampleEnd="249934" MonolithOffset="1007616" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="91" LoKey="91" HiKey="92" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G5_RR1.wav"
+          Duplicate="1" SampleEnd="251667" MonolithOffset="1261568" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="89" LoKey="89" HiKey="90" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F5_RR4.wav"
+          Duplicate="1" SampleEnd="247375" MonolithOffset="1515520" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="89" LoKey="89" HiKey="90" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F5_RR3.wav"
+          Duplicate="1" SampleEnd="249934" MonolithOffset="1765376" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="89" LoKey="89" HiKey="90" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F5_RR2.wav"
+          Duplicate="1" SampleEnd="251667" MonolithOffset="2019328" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="89" LoKey="89" HiKey="90" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F5_RR1.wav"
+          Duplicate="1" SampleEnd="250898" MonolithOffset="2273280" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="87" LoKey="87" HiKey="88" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#5_RR4.wav"
+          Duplicate="1" SampleEnd="249934" MonolithOffset="2527232" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="87" LoKey="87" HiKey="88" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#5_RR3.wav"
+          Duplicate="1" SampleEnd="249961" MonolithOffset="2781184" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="87" LoKey="87" HiKey="88" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#5_RR2.wav"
+          Duplicate="1" SampleEnd="250898" MonolithOffset="3035136" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="87" LoKey="87" HiKey="88" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#5_RR1.wav"
+          Duplicate="1" SampleEnd="251075" MonolithOffset="3289088" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="85" LoKey="85" HiKey="86" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#5_RR4.wav"
+          Duplicate="1" SampleEnd="249961" MonolithOffset="3543040" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="85" LoKey="85" HiKey="86" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#5_RR3.wav"
+          Duplicate="1" SampleEnd="250652" MonolithOffset="3796992" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="85" LoKey="85" HiKey="86" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#5_RR2.wav"
+          Duplicate="1" SampleEnd="251075" MonolithOffset="4050944" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="85" LoKey="85" HiKey="86" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#5_RR1.wav"
+          Duplicate="1" SampleEnd="250539" MonolithOffset="4304896" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="83" LoKey="83" HiKey="84" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B4_RR4.wav"
+          Duplicate="1" SampleEnd="250652" MonolithOffset="4558848" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="83" LoKey="83" HiKey="84" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B4_RR3.wav"
+          Duplicate="1" SampleEnd="247919" MonolithOffset="4812800" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="83" LoKey="83" HiKey="84" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B4_RR2.wav"
+          Duplicate="1" SampleEnd="250539" MonolithOffset="5062656" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="83" LoKey="83" HiKey="84" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B4_RR1.wav"
+          Duplicate="1" SampleEnd="254937" MonolithOffset="5316608" MonolithLength="258048"
+          SampleRate="48000.0"/>
+  <sample Root="81" LoKey="81" HiKey="82" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A4_RR4.wav"
+          Duplicate="1" SampleEnd="247919" MonolithOffset="5574656" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="81" LoKey="81" HiKey="82" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A4_RR3.wav"
+          Duplicate="1" SampleEnd="248603" MonolithOffset="5824512" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="81" LoKey="81" HiKey="82" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A4_RR2.wav"
+          Duplicate="1" SampleEnd="254937" MonolithOffset="6074368" MonolithLength="258048"
+          SampleRate="48000.0"/>
+  <sample Root="81" LoKey="81" HiKey="82" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A4_RR1.wav"
+          Duplicate="1" SampleEnd="251305" MonolithOffset="6332416" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="79" LoKey="79" HiKey="80" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G4_RR4.wav"
+          Duplicate="1" SampleEnd="248603" MonolithOffset="6586368" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="79" LoKey="79" HiKey="80" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G4_RR3.wav"
+          Duplicate="1" SampleEnd="249625" MonolithOffset="6836224" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="79" LoKey="79" HiKey="80" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G4_RR2.wav"
+          Duplicate="1" SampleEnd="251305" MonolithOffset="7086080" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="79" LoKey="79" HiKey="80" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G4_RR1.wav"
+          Duplicate="1" SampleEnd="250389" MonolithOffset="7340032" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="77" LoKey="77" HiKey="78" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F4_RR4.wav"
+          Duplicate="1" SampleEnd="249625" MonolithOffset="7593984" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="77" LoKey="77" HiKey="78" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F4_RR3.wav"
+          Duplicate="1" SampleEnd="250848" MonolithOffset="7843840" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="77" LoKey="77" HiKey="78" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F4_RR2.wav"
+          Duplicate="1" SampleEnd="250389" MonolithOffset="8097792" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="77" LoKey="77" HiKey="78" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_F4_RR1.wav"
+          Duplicate="1" SampleEnd="251428" MonolithOffset="8351744" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="75" LoKey="75" HiKey="76" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#4_RR4.wav"
+          Duplicate="1" SampleEnd="250848" MonolithOffset="8605696" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="75" LoKey="75" HiKey="76" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#4_RR3.wav"
+          Duplicate="1" SampleEnd="251060" MonolithOffset="8859648" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="75" LoKey="75" HiKey="76" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#4_RR2.wav"
+          Duplicate="1" SampleEnd="251428" MonolithOffset="9113600" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="75" LoKey="75" HiKey="76" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_D#4_RR1.wav"
+          Duplicate="1" SampleEnd="248842" MonolithOffset="9367552" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="73" LoKey="73" HiKey="74" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#4_RR4.wav"
+          Duplicate="1" SampleEnd="251060" MonolithOffset="9617408" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="73" LoKey="73" HiKey="74" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#4_RR3.wav"
+          Duplicate="1" SampleEnd="251049" MonolithOffset="9871360" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="73" LoKey="73" HiKey="74" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#4_RR2.wav"
+          Duplicate="1" SampleEnd="248842" MonolithOffset="10125312" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="73" LoKey="73" HiKey="74" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_C#4_RR1.wav"
+          Duplicate="1" SampleEnd="251225" MonolithOffset="10375168" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="71" LoKey="71" HiKey="72" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B3_RR4.wav"
+          Duplicate="1" SampleEnd="251049" MonolithOffset="10629120" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="71" LoKey="71" HiKey="72" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B3_RR3.wav"
+          Duplicate="1" SampleEnd="250153" MonolithOffset="10883072" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="71" LoKey="71" HiKey="72" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B3_RR2.wav"
+          Duplicate="1" SampleEnd="251225" MonolithOffset="11137024" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="71" LoKey="71" HiKey="72" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_B3_RR1.wav"
+          Duplicate="1" SampleEnd="248972" MonolithOffset="11390976" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="69" LoKey="69" HiKey="70" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A3_RR3.wav"
+          Duplicate="1" SampleEnd="253741" MonolithOffset="11640832" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="69" LoKey="69" HiKey="70" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A3_RR4.wav"
+          Duplicate="1" SampleEnd="250153" MonolithOffset="11894784" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="69" LoKey="69" HiKey="70" LoVel="0" HiVel="127" RRGroup="2"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A3_RR2.wav"
+          Duplicate="1" SampleEnd="248972" MonolithOffset="12148736" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="69" LoKey="69" HiKey="70" LoVel="0" HiVel="127" RRGroup="1"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_A3_RR1.wav"
+          Duplicate="1" SampleEnd="249783" MonolithOffset="12398592" MonolithLength="249856"
+          SampleRate="48000.0"/>
+  <sample Root="67" LoKey="67" HiKey="68" LoVel="0" HiVel="127" RRGroup="4"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G3_RR4.wav"
+          Duplicate="1" SampleEnd="253741" MonolithOffset="12648448" MonolithLength="253952"
+          SampleRate="48000.0"/>
+  <sample Root="67" LoKey="67" HiKey="68" LoVel="0" HiVel="127" RRGroup="3"
+          FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G3_RR3.wav"
+          Duplicate="1" SampleEnd="249955" MonolithOffset="12902400" MonolithLength="253952"
+          SampleRate="48000.0"/>
+</samplemap>

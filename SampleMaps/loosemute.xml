@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <samplemap CrossfadeGamma="1.0" ID="loosemute" RRGroupAmount="4.0" MicPositions=";"
-           SaveMode="2">
+           SaveMode="0">
   <sample Root="40" LoKey="40" HiKey="41" LoVel="0" HiVel="127" RRGroup="1"
           FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_looseMute_stringAll_E1_RR1.wav"
           Duplicate="0" SampleEnd="240638" MonolithOffset="0" MonolithLength="241664"

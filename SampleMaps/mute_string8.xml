@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <samplemap ID="mute_string8" RRGroupAmount="4.0" MicPositions=";" CrossfadeGamma="1.0"
-           SaveMode="2">
+           SaveMode="0">
   <sample Root="54" LoKey="54" HiKey="55" LoVel="0" HiVel="127" RRGroup="1"
           FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_mute_string8_F#2_RR1.wav"
           Duplicate="0" LoopXFade="0" LoopStart="2100" SampleStart="2100"

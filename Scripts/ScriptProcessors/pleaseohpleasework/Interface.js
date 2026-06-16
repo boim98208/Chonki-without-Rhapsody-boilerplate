@@ -41,8 +41,6 @@ assignCC("VibratoAmountKnob", 1);
 
 assignCC("VibratoFrequencyKnob", 2);
 
-applyCC();
-
 /*const var String8SusMute = Synth.getMidiProcessor("String8SusMute");
 const var String3SusMute = Synth.getMidiProcessor("String3SusMute");
 const var String8MuteMute = Synth.getMidiProcessor("String8MuteMute");
@@ -81,6 +79,8 @@ const var RightGuitarMuteMute = Synth.getMidiProcessor("RightGuitarMuteMute");
 
 const var LeftGuitarLooseMute = Synth.getMidiProcessor("LeftGuitarLooseMute");
 const var RightGuitarLooseMute = Synth.getMidiProcessor("RightGuitarLooseMute");
+
+const var String8to4SusMute = Synth.getMidiProcessor("String8to4SusMute");
 
 
 const var AllSusSamplerMutes = [LeftGuitarSusMute, RightGuitarSusMute];
@@ -514,6 +514,11 @@ Content.getComponent("ShowSettingsBtn").setControlCallback(onShowSettingsBtnCont
 // timer for tooltips to display
 
 Synth.startTimer(0.5);
+
+
+// Getting the Midi CCs in place
+
+applyCC();
 
 inline function isBetweenIncl(lowBound, highBound, num){
 	if(num >= lowBound && num <= highBound){

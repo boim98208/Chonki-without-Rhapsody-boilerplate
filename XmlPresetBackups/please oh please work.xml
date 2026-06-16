@@ -12,9 +12,9 @@
             <Control type="ScriptButton" id="ArtificalRRsBtn" value="1.0"/>
             <Control type="ScriptSlider" id="ToneKnob" value="0.0"/>
             <Control type="ScriptButton" id="ToneVelocityBtn" value="0.0"/>
-            <Control type="ScriptButton" id="DoubleTrackingBtn" value="0.0"/>
+            <Control type="ScriptButton" id="DoubleTrackingBtn" value="1.0"/>
             <Control type="ScriptSlider" id="VibratoAmountKnob" value="0.0"/>
-            <Control type="ScriptSlider" id="VibratoFrequencyKnob" value="6.929999828338623"/>
+            <Control type="ScriptSlider" id="VibratoFrequencyKnob" value="8.5"/>
             <Control type="ScriptSlider" id="PitchBendRangeKnob" value="2.0"/>
             <Control type="ScriptButton" id="ShowSettingsBtn" value="0.0"/>
           </Content>
@@ -47,7 +47,7 @@
                            deferControlCallback="1" defaultValue="1.0" isPluginParameter="1"
                            pluginParameterName="Double Tracking"/>
                 <Component type="ScriptSlider" id="VibratoAmountKnob" x="0" y="100" text="Vibrato Depth"
-                           tooltip="Controls depth of vibrato ranging from 0 to 2 semitones"
+                           tooltip="Emulates vibrato ranging from 0 to 3.5 semitones. Change this during lead playing for expression"
                            isPluginParameter="1" pluginParameterName="Tone" parentComponent="ScriptPanel1"
                            height="50" width="163" max="3.5" suffix=" semitones" defaultValue="2.0"
                            middlePosition="1.0"/>
@@ -161,41 +161,6 @@
         </Processor>
       </ChildProcessors>
     </Processor>
-    <Processor Type="GlobalModulatorContainer" ID="Global Modulator Container1"
-               Bypassed="0" Gain="0.25" Balance="0.0" VoiceLimit="256.0" KillFadeTime="20.0"
-               IconColour="0">
-      <ChildProcessors>
-        <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
-          <ChildProcessors/>
-        </Processor>
-        <Processor Type="ModulatorChain" ID="Global Modulators" Bypassed="0" Intensity="1.0">
-          <ChildProcessors>
-            <Processor Type="LFO" ID="LFO Modulator1" Bypassed="1" Intensity="0.0" Bipolar="0"
-                       Frequency="8.582308769226074" FadeIn="0.0" WaveformType="1.0"
-                       Legato="0.0" TempoSync="0.0" SmoothingTime="2.087458848953247"
-                       LoopEnabled="1.0" PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                       CustomWaveform="" StepData="64....f+vdT33CtdTfO...f+nYlY7C...3O.........9C...3O...f+....9C...3O...f+....9C...3O...f+.">
-              <ChildProcessors>
-                <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
-                  <ChildProcessors/>
-                </Processor>
-                <Processor Type="ModulatorChain" ID="LFO Frequency Mod" Bypassed="0" Intensity="1.0">
-                  <ChildProcessors/>
-                </Processor>
-              </ChildProcessors>
-            </Processor>
-          </ChildProcessors>
-        </Processor>
-        <Processor Type="ModulatorChain" ID="PitchModulation" Bypassed="0" Intensity="0.0">
-          <ChildProcessors/>
-        </Processor>
-        <Processor Type="EffectChain" ID="FX" Bypassed="0">
-          <ChildProcessors/>
-        </Processor>
-      </ChildProcessors>
-      <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
-      <MatrixData/>
-    </Processor>
     <Processor Type="SynthChain" ID="SamplerContainer" Bypassed="0" Gain="1.0"
                Balance="0.0" VoiceLimit="256.0" KillFadeTime="20.0" IconColour="0">
       <ChildProcessors>
@@ -226,7 +191,7 @@
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
                 <Processor Type="SimpleGain" ID="LeftGuitarGain" Bypassed="0" Gain="0.0"
-                           Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+                           Delay="0.0" Width="100.0" Balance="-100.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
                       <ChildProcessors/>
@@ -313,10 +278,9 @@
                       <ChildProcessors/>
                     </Processor>
                     <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                               Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                               Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                               PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                               CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                               Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                               TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                               SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                       <ChildProcessors>
                         <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -426,10 +390,9 @@
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -516,10 +479,9 @@
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -579,7 +541,7 @@
                 <Processor Type="EffectChain" ID="FX" Bypassed="0">
                   <ChildProcessors/>
                 </Processor>
-                <Processor Type="StreamingSampler" ID="String8SusSampler" Bypassed="0" Gain="1.0"
+                <Processor Type="StreamingSampler" ID="String8SusSampler" Bypassed="1" Gain="1.0"
                            Balance="0.0" VoiceLimit="256.0" KillFadeTime="20.0" IconColour="0"
                            PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
@@ -589,7 +551,15 @@
                            Group7Table="" SampleMapID="sustain_string8">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
-                      <ChildProcessors/>
+                      <ChildProcessors>
+                        <Processor Type="MidiMuter" ID="String8SusMute" Bypassed="0">
+                          <ChildProcessors/>
+                          <Content>
+                            <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                            <Control type="ScriptButton" id="fixStuckNotes" value="0.0"/>
+                          </Content>
+                        </Processor>
+                      </ChildProcessors>
                     </Processor>
                     <Processor Type="ModulatorChain" ID="GainModulation" Bypassed="0" Intensity="1.0">
                       <ChildProcessors>
@@ -633,14 +603,13 @@
                         </Processor>
                         <Processor Type="GlobalTimeVariantModulator" ID="Global Time Variant Modulator1"
                                    Bypassed="1" Intensity="0.1666666716337204" Bipolar="0" UseTable="0"
-                                   Inverted="0" TableData="" Connection="Global Modulator Container1:LFO Modulator1">
+                                   Inverted="0" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -722,14 +691,109 @@
                         </Processor>
                         <Processor Type="GlobalTimeVariantModulator" ID="Global Time Variant Modulator2"
                                    Bypassed="1" Intensity="0.1666666716337204" Bipolar="1" UseTable="0"
-                                   Inverted="1" TableData="" Connection="Global Modulator Container1:LFO Modulator1">
+                                   Inverted="1" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
+                          <ChildProcessors>
+                            <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
+                              <ChildProcessors/>
+                            </Processor>
+                            <Processor Type="ModulatorChain" ID="LFO Frequency Mod" Bypassed="0" Intensity="1.0">
+                              <ChildProcessors/>
+                            </Processor>
+                          </ChildProcessors>
+                        </Processor>
+                      </ChildProcessors>
+                    </Processor>
+                    <Processor Type="EffectChain" ID="FX" Bypassed="0">
+                      <ChildProcessors/>
+                    </Processor>
+                    <Processor Type="ModulatorChain" ID="Sample Start" Bypassed="0" Intensity="1.0">
+                      <ChildProcessors/>
+                    </Processor>
+                    <Processor Type="ModulatorChain" ID="Group Fade" Bypassed="0" Intensity="1.0">
+                      <ChildProcessors/>
+                    </Processor>
+                  </ChildProcessors>
+                  <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+                  <channels>
+                    <channelData enabled="1" level="0.0" suffix=""/>
+                  </channels>
+                </Processor>
+                <Processor Type="StreamingSampler" ID="String8to4SusSampler" Bypassed="0"
+                           Gain="1.0" Balance="0.0" VoiceLimit="256.0" KillFadeTime="20.0"
+                           IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
+                           SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
+                           OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
+                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
+                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
+                           Group7Table="" SampleMapID="sustain_string8-4">
+                  <ChildProcessors>
+                    <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
+                      <ChildProcessors>
+                        <Processor Type="MidiMuter" ID="String8to4SusMute" Bypassed="1">
+                          <ChildProcessors/>
+                          <Content>
+                            <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                            <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
+                          </Content>
+                        </Processor>
+                      </ChildProcessors>
+                    </Processor>
+                    <Processor Type="ModulatorChain" ID="GainModulation" Bypassed="0" Intensity="1.0">
+                      <ChildProcessors>
+                        <Processor Type="Velocity" ID="Velocity Modulator6" Bypassed="0" Intensity="0.6600000262260437"
+                                   UseTable="0.0" Inverted="0.0" DecibelMode="0.0">
+                          <ChildProcessors/>
+                        </Processor>
+                        <Processor Type="AHDSR" ID="AHDSR Envelope6" Bypassed="0" Monophonic="0.0"
+                                   Retrigger="1.0" Intensity="1.0" AttackCurve="0.0" DecayCurve="0.0"
+                                   Attack="0.0" AttackLevel="0.0" Hold="10.0" Decay="300.0" Sustain="0.0"
+                                   Release="67.0" EcoMode="1.0">
+                          <ChildProcessors>
+                            <Processor Type="ModulatorChain" ID="Attack Time" Bypassed="0" Intensity="1.0">
+                              <ChildProcessors/>
+                            </Processor>
+                            <Processor Type="ModulatorChain" ID="Attack Level" Bypassed="0" Intensity="1.0">
+                              <ChildProcessors/>
+                            </Processor>
+                            <Processor Type="ModulatorChain" ID="Decay Time" Bypassed="0" Intensity="1.0">
+                              <ChildProcessors/>
+                            </Processor>
+                            <Processor Type="ModulatorChain" ID="Sustain Level" Bypassed="0" Intensity="1.0">
+                              <ChildProcessors/>
+                            </Processor>
+                            <Processor Type="ModulatorChain" ID="Release Time" Bypassed="0" Intensity="1.0">
+                              <ChildProcessors/>
+                            </Processor>
+                          </ChildProcessors>
+                        </Processor>
+                      </ChildProcessors>
+                    </Processor>
+                    <Processor Type="ModulatorChain" ID="PitchModulation" Bypassed="0" Intensity="0.0">
+                      <ChildProcessors>
+                        <Processor Type="PitchWheel" ID="PitchBendModulator" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="1" UseTable="0.0" Inverted="0.0" SmoothTime="15.0">
+                          <ChildProcessors/>
+                        </Processor>
+                        <Processor Type="Random" ID="Random Modulator6" Bypassed="0" Intensity="0.004166666883975267"
+                                   Bipolar="1" UseTable="0.0" RandomTableData="">
+                          <ChildProcessors/>
+                        </Processor>
+                        <Processor Type="GlobalTimeVariantModulator" ID="Global Time Variant Modulator3"
+                                   Bypassed="1" Intensity="0.1666666716337204" Bipolar="0" UseTable="0"
+                                   Inverted="0" TableData="" Connection="">
+                          <ChildProcessors/>
+                        </Processor>
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -771,7 +835,7 @@
                 <Processor Type="MidiMuter" ID="RightGuitarMute" Bypassed="0">
                   <ChildProcessors/>
                   <Content>
-                    <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                    <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                     <Control type="ScriptButton" id="fixStuckNotes" value="0.0"/>
                   </Content>
                 </Processor>
@@ -785,7 +849,7 @@
             </Processor>
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
-                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="-100.0"
+                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="0.0"
                            Delay="0.0" Width="0.0" Balance="100.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
@@ -866,10 +930,9 @@
                       <ChildProcessors/>
                     </Processor>
                     <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                               Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                               Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                               PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                               CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                               Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                               TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                               SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                       <ChildProcessors>
                         <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -980,10 +1043,9 @@
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -1070,10 +1132,9 @@
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -1186,10 +1247,9 @@
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">
@@ -1276,10 +1336,9 @@
                           <ChildProcessors/>
                         </Processor>
                         <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="6.929999828338623" FadeIn="3000.0" WaveformType="1.0"
-                                   Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
-                                   PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
-                                   CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
+                                   Frequency="8.5" FadeIn="3000.0" WaveformType="1.0" Legato="1.0"
+                                   TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0" PhaseOffset="0.0"
+                                   SyncToMasterClock="0.0" IgnoreNoteOn="0.0" CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
                                    StepData="64....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+.">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="LFO Intensity Mod" Bypassed="0" Intensity="1.0">

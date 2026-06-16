@@ -80,7 +80,36 @@ const var RightGuitarMuteMute = Synth.getMidiProcessor("RightGuitarMuteMute");
 const var LeftGuitarLooseMute = Synth.getMidiProcessor("LeftGuitarLooseMute");
 const var RightGuitarLooseMute = Synth.getMidiProcessor("RightGuitarLooseMute");
 
+const var String8to4MuteMute = Synth.getMidiProcessor("String8to4MuteMute");
+const var String3MuteMute = Synth.getMidiProcessor("String3MuteMute");
+const var String8MuteMute = Synth.getMidiProcessor("String8MuteMute");
+
+const var RightString3MuteMute = Synth.getMidiProcessor("RightString3MuteMute");
+const var RightString8MuteMute = Synth.getMidiProcessor("RightString8MuteMute");
+const var RightString8to4MuteMute = Synth.getMidiProcessor("RightString8to4MuteMute");
+
+
+// Add in the ones from the right later
+
+const var AllString8to4MuteMutes = [String8to4MuteMute, RightString8to4MuteMute];
+
+const var AllString3And8MuteMutes = [String3MuteMute, String8MuteMute, RightString3MuteMute, RightString8MuteMute];
+
+
 const var String8to4SusMute = Synth.getMidiProcessor("String8to4SusMute");
+const var String3SusMute = Synth.getMidiProcessor("String3SusMute");
+const var String8SusMute = Synth.getMidiProcessor("String8SusMute");
+
+const var RightString8SusMute = Synth.getMidiProcessor("RightString8SusMute");
+const var RightString3SusMute = Synth.getMidiProcessor("RightString3SusMute");
+const var RightString8to4SusMute = Synth.getMidiProcessor("RightString8to4SusMute");
+
+
+// Add in the ones from the right later
+
+const var AllString8to4SusMutes = [String8to4SusMute, RightString8to4SusMute];
+
+const var AllString3And8SusMutes = [String3SusMute, String8SusMute, RightString3SusMute, RightString8SusMute];
 
 
 const var AllSusSamplerMutes = [LeftGuitarSusMute, RightGuitarSusMute];
@@ -88,6 +117,8 @@ const var AllSusSamplerMutes = [LeftGuitarSusMute, RightGuitarSusMute];
 const var AllMuteSamplerMutes = [LeftGuitarMuteMute, RightGuitarMuteMute];
 
 const var AllLooseSamplerMutes = [LeftGuitarLooseMute, RightGuitarLooseMute];
+
+
 
 inline function setAllSamplersMuted(SamplerMutes){
 	for(var i = 0; i < SamplerMutes.length; i++){
@@ -105,13 +136,29 @@ setAllSamplersUnmuted(AllSusSamplerMutes);
 setAllSamplersMuted(AllMuteSamplerMutes);
 setAllSamplersMuted(AllLooseSamplerMutes);
 
-inline function detectKeyswitch(notePlayed){
 
+// keyswitching and choosing to latch system
+
+var nonLatchingEnabled = false;
+
+inline function detectKeyswitch(notePlayed, noteVelocity){
+
+	
+	
+	if(!nonLatchingEnabled){
+		return detectKeyswitchNoLatch(notePlayed);
+	}
+
+	
+}
+
+inline function detectKeyswitchNoLatch(notePlayed){
+	
 
 	if(notePlayed == SUSKEYSWITCH){
 		resetKeyswitchColors();
 		
-
+	
 		articulationPlaying = ArticulationType.Sustain;
 		
 		setAllSamplersMuted(AllMuteSamplerMutes);
@@ -150,7 +197,7 @@ inline function detectKeyswitch(notePlayed){
 		setAllSamplersMuted(AllMuteSamplerMutes);
 		setAllSamplersUnmuted(AllLooseSamplerMutes);
 		setAllSamplersMuted(AllSusSamplerMutes);
-
+	
 		
 		for(var i = LOWESTNOTE; i <= 67; i++){
 			Engine.setKeyColour(i, Colours.withAlpha(0xB2EDE9, 0.5)); 
@@ -166,14 +213,13 @@ inline function detectKeyswitch(notePlayed){
 	}else{
 		return false;
 	}
-	
 }
 
 detectKeyswitch(SUSKEYSWITCH);
 
 
 const var SamplersLeft = [];
-SamplersLeft.reserve(5);
+SamplersLeft.reserve(7);
 
 SamplersLeft.push(Synth.getSampler("String8SusSampler"));
 SamplersLeft.push(Synth.getSampler("String8MuteSampler"));
@@ -181,14 +227,20 @@ SamplersLeft.push(Synth.getSampler("String3SusSampler"));
 SamplersLeft.push(Synth.getSampler("String3MuteSampler"));
 SamplersLeft.push(Synth.getSampler("LooseMuteSampler"));
 
+SamplersLeft.push(Synth.getSampler("String8to4SusSampler"));
+SamplersLeft.push(Synth.getSampler("String8to4MuteSampler"));
+
 const var SamplersRight = [];
-SamplersRight.reserve(5);
+SamplersRight.reserve(7);
 
 SamplersRight.push(Synth.getSampler("String8SusSamplerRight"));
 SamplersRight.push(Synth.getSampler("String8MuteSamplerRight"));
 SamplersRight.push(Synth.getSampler("String3SusSamplerRight"));
 SamplersRight.push(Synth.getSampler("String3MuteSamplerRight"));
 SamplersRight.push(Synth.getSampler("LooseMuteSamplerRight"));
+
+SamplersRight.push(Synth.getSampler("String8to4SusSamplerRight"));
+SamplersRight.push(Synth.getSampler("String8to4MuteSamplerRight"));
 
 
 reg RRsToGoThrough = [1, 2, 3, 4];
@@ -200,16 +252,26 @@ reg RRCounter = 2;
 for(var i = 0; i < SamplersLeft.length; i++){
 	SamplersLeft[i].enableRoundRobin(false);
 	SamplersRight[i].enableRoundRobin(false);
+
 }
 
 inline function setRRForSamplers(RR){
+local stringSelectValue = StringSelectKnob.getValue();
+local RROffset;
+// This RROffset is cringe and is only here because of the samplers and their weird RR setup
+// Dont ever do stuff like this again please
+if(stringSelectValue == 0){
+	RROffset = 1;
+}else{
+	RROffset = 2;
+}
 
 
 	for(var i = 0; i < SamplersLeft.length; i++){
 		SamplersLeft[i].setActiveGroup(RR);
 		
 		// The + 1 at the end prevents 0 as an argument
-		SamplersRight[i].setActiveGroup((RR + 2) % NUMOFRRS + 1);
+		SamplersRight[i].setActiveGroup((RR + RROffset) % NUMOFRRS + 1);
 	
 	}
 }
@@ -486,6 +548,33 @@ Content.getComponent("PitchBendRangeKnob").setControlCallback(onPitchBendRangeKn
 changePitchBendRange(2, PitchBendModulators);
 
 
+const var StringSelectKnob = Content.getComponent("StringSelectKnob");
+
+
+inline function onStringSelectKnobControl(component, value)
+{
+	if(value == 0){
+		StringSelectKnob.set("text", "All Strings Enabled");
+	
+		setAllSamplersMuted(AllString3And8MuteMutes);
+		setAllSamplersMuted(AllString3And8SusMutes);
+		setAllSamplersUnmuted(AllString8to4MuteMutes);
+		setAllSamplersUnmuted(AllString8to4SusMutes);
+	}else{
+		
+		StringSelectKnob.set("text", "Low String Focused");
+	
+		setAllSamplersUnmuted(AllString3And8MuteMutes);
+		setAllSamplersUnmuted(AllString3And8SusMutes);
+		setAllSamplersMuted(AllString8to4MuteMutes);
+		setAllSamplersMuted(AllString8to4SusMutes);
+	}
+};
+
+Content.getComponent("StringSelectKnob").setControlCallback(onStringSelectKnobControl);
+
+
+
 // GUI
 
 const var ArticulationPlayingLabel = Content.getComponent("ArticulationPlayingLabel");
@@ -534,8 +623,9 @@ function onNoteOn()
 
 	local RRToPlay;
 	local notePlayed = Message.getNoteNumber();
+	local noteVelocity = Message.getVelocity();
 	
-	detectKeyswitch(notePlayed);
+	detectKeyswitch(notePlayed, noteVelocity);
 	
 	if(Message.getNoteNumber() >= LOWESTNOTE && Message.getNoteNumber() <= HIGHESTNOTE){
 		changeToneWithVelocityIfEnabled(Message.getVelocity());

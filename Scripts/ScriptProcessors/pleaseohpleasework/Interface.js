@@ -1,4 +1,37 @@
-  include("GlobalConstants.js");
+ 
+
+
+const var SourceSusRelAHDSR = Synth.getModulator("SourceSusRelAHDSR");
+const var AllSusRelAHDSR = Synth.getAllModulators("SusRelAHDSR");
+
+const var SourcePitchBendModulator = Synth.getModulator("SourcePitchBendModulator");
+const var AllPitchBendModulator = Synth.getAllModulators("PitchBendModulator");
+
+const var SourceSusAHDSR = Synth.getModulator("SourceSusAHDSR");
+const var AllSusAHDSR = Synth.getAllModulators("SusAHDSR");
+
+
+const var SourceLooseMuteAHDSR = Synth.getModulator("SourceLooseMuteAHDSR");
+const var AllLooseMuteAHDSR = Synth.getAllModulators("LooseMuteAHDSR");
+
+inline function copyModulatorParams(source, target)
+{
+	for(var j = 0; j < target.length; j++){
+
+    for (var i = 0; i < source.getNumAttributes(); i++)
+    {
+        target[j].setAttribute(i, source.getAttribute(i));
+    }
+    
+    }
+}
+
+copyModulatorParams(SourceSusRelAHDSR, AllSusRelAHDSR);
+
+copyModulatorParams(SourceSusAHDSR, AllSusAHDSR);
+
+
+include("GlobalConstants.js");
 
 
 Content.makeFrontInterface(1000, 710);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <samplemap CrossfadeGamma="1.0" ID="sus_string3" RRGroupAmount="4.0" MicPositions=";"
-           SaveMode="0">
+           SaveMode="2">
   <sample Root="67" LoKey="67" HiKey="68" LoVel="0" HiVel="127" RRGroup="2"
           FileName="D:\Reaper Projects\Reaper Projects\Batch editing for libraries\Chonki\exports\Chonki_sustain_string3_G3_RR2.wav"
           Duplicate="1" SampleEnd="249783" MonolithOffset="0" MonolithLength="249856"

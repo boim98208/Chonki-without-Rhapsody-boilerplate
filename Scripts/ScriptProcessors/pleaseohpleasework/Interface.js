@@ -138,14 +138,42 @@ setAllSamplersMuted(AllLooseSamplerMutes);
 
 
 // keyswitching and choosing to latch system
+const var EnableLatchChoiceBtn = Content.getComponent("EnableLatchChoiceBtn");
 
-var nonLatchingEnabled = false;
+var latchingChoiceEnabled = EnableLatchChoiceBtn.getValue();
+var latchedKeyswtich = ArticulationType.Sustain;
+
+
+inline function onEnableLatchChoiceBtnControl(component, value)
+{
+	latchingChoiceEnabled = value;
+	latchedKeyswtich = articulationPlaying;
+};
+
+Content.getComponent("EnableLatchChoiceBtn").setControlCallback(onEnableLatchChoiceBtnControl);
+
+inline function isAKeyswitch(notePlayed){
+	local lowestKeyswitch = SUSKEYSWITCH;
+	local highestKeyswitch = LOOSEMUTEKEYSWITCH;
+	
+
+	return isBetweenIncl(lowestKeyswitch, highestKeyswitch, notePlayed);
+}
 
 inline function detectKeyswitch(notePlayed, noteVelocity){
 
 	
 	
-	if(!nonLatchingEnabled){
+	if(!latchingChoiceEnabled){
+
+	
+		return detectKeyswitchNoLatch(notePlayed);
+	}else{
+	
+		if(noteVelocity >= 120){
+			latchedKeyswtich = notePlayed;
+		}
+		
 		return detectKeyswitchNoLatch(notePlayed);
 	}
 
@@ -215,7 +243,8 @@ inline function detectKeyswitchNoLatch(notePlayed){
 	}
 }
 
-detectKeyswitch(SUSKEYSWITCH);
+// default to sustain
+detectKeyswitch(SUSKEYSWITCH, 100);
 
 
 const var SamplersLeft = [];
@@ -256,24 +285,25 @@ for(var i = 0; i < SamplersLeft.length; i++){
 }
 
 inline function setRRForSamplers(RR){
-local stringSelectValue = StringSelectKnob.getValue();
-local RROffset;
-// This RROffset is cringe and is only here because of the samplers and their weird RR setup
-// Dont ever do stuff like this again please
-if(stringSelectValue == 0){
-	RROffset = 1;
-}else{
-	RROffset = 2;
-}
-
-
-	for(var i = 0; i < SamplersLeft.length; i++){
-		SamplersLeft[i].setActiveGroup(RR);
-		
-		// The + 1 at the end prevents 0 as an argument
-		SamplersRight[i].setActiveGroup((RR + RROffset) % NUMOFRRS + 1);
+	local stringSelectValue = StringSelectKnob.getValue();
+	local RROffset;
 	
+	// This RROffset is cringe and is only here because of the samplers and their weird RR setup
+	// Dont ever do stuff like this again please
+	if(stringSelectValue == 0 && articulationPlaying != ArticulationType.LooseMute){
+		RROffset = 1;
+	}else{
+		RROffset = 2;
 	}
+	
+	
+		for(var i = 0; i < SamplersLeft.length; i++){
+			SamplersLeft[i].setActiveGroup(RR);
+			
+			// The + 1 at the end prevents 0 as an argument
+			SamplersRight[i].setActiveGroup((RR + RROffset) % NUMOFRRS + 1);
+		
+		}
 }
 
 inline function incrementRRCounter(){
@@ -619,15 +649,17 @@ inline function isBetweenIncl(lowBound, highBound, num){
 
 function onNoteOn()
 {
-	
+
 
 	local RRToPlay;
 	local notePlayed = Message.getNoteNumber();
 	local noteVelocity = Message.getVelocity();
 	
+	if(isAKeyswitch(notePlayed)){
 	detectKeyswitch(notePlayed, noteVelocity);
+	}
 	
-	if(Message.getNoteNumber() >= LOWESTNOTE && Message.getNoteNumber() <= HIGHESTNOTE){
+	if(notePlayed >= LOWESTNOTE && notePlayed <= HIGHESTNOTE){
 		changeToneWithVelocityIfEnabled(Message.getVelocity());
 		}
 	
@@ -663,6 +695,14 @@ function onNoteOn()
 }
  function onNoteOff()
 {
+	local RRToPlay;
+	local notePlayed = Message.getNoteNumber();
+	local noteVelocity = Message.getVelocity();
+	
+	if(isAKeyswitch(notePlayed) && latchingChoiceEnabled){
+		detectKeyswitchNoLatch(latchedKeyswtich);
+	}
+	
 	
 }
  function onController()

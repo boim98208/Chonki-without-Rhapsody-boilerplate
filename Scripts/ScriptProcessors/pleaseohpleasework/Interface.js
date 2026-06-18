@@ -1,5 +1,5 @@
- 
-
+ var testNotes = [51, 58, 63, 67];
+ reg testIds = [-1, -1, -1, -1, -1, -1, -1, -1];
 
 const var SourceSusRelAHDSR = Synth.getModulator("SourceSusRelAHDSR");
 const var AllSusRelAHDSR = Synth.getAllModulators("SusRelAHDSR");
@@ -99,6 +99,9 @@ Engine.setKeyColour(LOOSEMUTEKEYSWITCH, Colours.withAlpha(Colours.red, 0.5));
 
 
 Engine.setKeyColour(42, Colours.withAlpha(Colours.red, 0.5)); 
+Engine.setKeyColour(StrummingKeyswitch.downStrumKeyswitch, Colours.withAlpha(Colours.red, 0.2)); 
+
+Engine.setKeyColour(StrummingKeyswitch.upStrumKeyswitch, Colours.withAlpha(Colours.red, 0.2)); 
 
 var artificialRRsEnabled = false;
 var toneWithVelocityEnabled = false;
@@ -660,7 +663,77 @@ inline function onShowSettingsBtnControl(component, value)
 Content.getComponent("ShowSettingsBtn").setControlCallback(onShowSettingsBtnControl);
 
 
+// Strumming engine functions
 
+// dont forget to correlate the note delay with velocity in some way
+
+inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
+	
+
+
+	if(notePlayed != StrummingKeyswitch.downStrumKeyswitch && notePlayed != StrummingKeyswitch.upStrumKeyswitch){
+		return false;
+	}
+	
+	Message.ignoreEvent(true);
+		
+	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch){
+		downStrum(notes, noteVelocity);
+		return true;
+	}
+	
+	if(notePlayed == StrummingKeyswitch.upStrumKeyswitch){
+		upStrum(notes, noteVelocity);
+		return true;
+	}
+	
+	
+	
+}
+
+inline function releaseStrumKey(noteReleased){
+	
+
+	if(noteReleased != StrummingKeyswitch.downStrumKeyswitch && noteReleased != StrummingKeyswitch.upStrumKeyswitch){
+		return false;
+	}
+	
+	for(var i = 0; i < testIds.length && testIds[i] != -1; i++){
+		Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(5));
+	}
+	
+	for(var i = 0; i < testIds.length; i++){
+		testIds[i] = -1;
+	}
+	
+}
+
+const var fastestNoteDelay = 5;
+
+const var slowestNoteDelay = 70;
+
+inline function downStrum(notes, noteVelocity){
+	
+	local delayMS = linMap(noteVelocity, 0, 127, slowestNoteDelay, fastestNoteDelay);
+	
+	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
+
+	for(var i = 0; i < notes.length; i++){
+		testIds[i] = Synth.addNoteOn(1, notes[i], noteVelocity, delaySamples * i);
+	}
+}
+
+inline function upStrum(notes, noteVelocity){
+	
+	local delayMS = linMap(noteVelocity, 0, 127, slowestNoteDelay, fastestNoteDelay);
+	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
+
+	for(var i = notes.length - 1; i >= 0; i--){
+		
+	// delaySamples * (notes.length - i) comes i starting high then going low
+		testIds[i] = Synth.addNoteOn(1, notes[i], noteVelocity, delaySamples * (notes.length - i));
+	}
+}
 
 
 // timer for tooltips to display
@@ -689,37 +762,37 @@ function onNoteOn()
 	local noteVelocity = Message.getVelocity();
 	
 	if(isAKeyswitch(notePlayed)){
-	detectKeyswitch(notePlayed, noteVelocity);
+		detectKeyswitch(notePlayed, noteVelocity);
 	}
 	
 	if(notePlayed >= LOWESTNOTE && notePlayed <= HIGHESTNOTE){
 		changeToneWithVelocityIfEnabled(Message.getVelocity());
-		}
+	}
 	
 	//RR groups start on 1, so I'm incrementing RRCounter to start on 1, but RRsToGoThrough to start at 0.
 	
 	if(artificialRRsEnabled){
 			RRToPlay = RRsToGoThrough[RRCounter - 1];
-		}else{
-			RRToPlay = RRCounter % (NUMOFRRS/2) + 1;
-		}
+	}else{
+		RRToPlay = RRCounter % (NUMOFRRS/2) + 1;
+	}
 		
 		
-		shuffleRRsIfNeeded();
-		incrementRRCounter();
+	shuffleRRsIfNeeded();
+	incrementRRCounter();
 		
 		
-		setRRForSamplers(RRToPlay);
+	setRRForSamplers(RRToPlay);
 		
-		if(articulationPlaying == 0){
-				ArticulationPlayingLabel.set("text", "Sustain");
-			}else if(articulationPlaying == 1){
-				ArticulationPlayingLabel.set("text", "Mute");
-			}else {
-				ArticulationPlayingLabel.set("text", "Loose Mute");
-			}
+	if(articulationPlaying == 0){
+		ArticulationPlayingLabel.set("text", "Sustain");
+	}else if(articulationPlaying == 1){
+		ArticulationPlayingLabel.set("text", "Mute");
+	}else {
+		ArticulationPlayingLabel.set("text", "Loose Mute");
+	}
 		
-	
+	strumIfStrumKeyPressed(notePlayed, testNotes, noteVelocity);
 	
 /*	if(isBetweenIncl(LOWESTNOTE, HIGHESTNOTE, notePlayed)){
 		Message.setNoteNumber(notePlayed + 2);
@@ -736,6 +809,7 @@ function onNoteOn()
 		detectKeyswitchNoLatch(latchedKeyswtich);
 	}
 	
+	releaseStrumKey(notePlayed);
 	
 }
  function onController()

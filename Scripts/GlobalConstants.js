@@ -11,3 +11,8 @@ namespace ArticulationType{
 	const var Mute = 1;
 	const var LooseMute = 2;
 }
+
+namespace StrummingKeyswitch{
+	const var downStrumKeyswitch = 96;
+	const var upStrumKeyswitch = 97;
+}

@@ -1,5 +1,13 @@
- var testNotes = [51, 58, 63, 67];
+ var testNotes = [51, 58, 63, 66];
+ const var secondChord = [50, 57, 63, 66];
+ const var thirdChord = [49, 56, 61, 65];
+ const var fourthChord = [47, 54, 59, 63];
+ const var fifthChord = [46, 53, 58, 61];
+ const var sixthChord = [46, 53, 56, 62];
+ const var firstChord = [51, 58, 63, 66];
+ 
  reg testIds = [-1, -1, -1, -1, -1, -1, -1, -1];
+ 
 
 const var SourceSusRelAHDSR = Synth.getModulator("SourceSusRelAHDSR");
 const var AllSusRelAHDSR = Synth.getAllModulators("SusRelAHDSR");
@@ -699,7 +707,10 @@ inline function releaseStrumKey(noteReleased){
 	}
 	
 	for(var i = 0; i < testIds.length && testIds[i] != -1; i++){
-		Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(5));
+		Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(2));
+		
+		/*Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(5));*/
+		
 	}
 	
 	for(var i = 0; i < testIds.length; i++){
@@ -714,7 +725,7 @@ const var slowestNoteDelay = 70;
 
 inline function downStrum(notes, noteVelocity){
 	
-	local delayMS = linMap(noteVelocity, 0, 127, slowestNoteDelay, fastestNoteDelay);
+	local delayMS = linMap(noteVelocity, 1, 127, slowestNoteDelay, fastestNoteDelay);
 	
 	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
 
@@ -760,6 +771,20 @@ function onNoteOn()
 	local RRToPlay;
 	local notePlayed = Message.getNoteNumber();
 	local noteVelocity = Message.getVelocity();
+	
+	if(notePlayed == 0){
+		testNotes = secondChord;
+		}else if(notePlayed == 1){
+			testNotes = thirdChord;
+		}else if(notePlayed == 2){
+			testNotes = fourthChord;
+		}else if (notePlayed == 3){
+			testNotes = fifthChord;
+		}else if(notePlayed == 4){
+			testNotes = sixthChord;
+		}else if(notePlayed == 5){
+			testNotes = firstChord;
+		}
 	
 	if(isAKeyswitch(notePlayed)){
 		detectKeyswitch(notePlayed, noteVelocity);

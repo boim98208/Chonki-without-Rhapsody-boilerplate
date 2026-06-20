@@ -7,6 +7,7 @@
  const var firstChord = [51, 58, 63, 66];
  
  reg testIds = [-1, -1, -1, -1, -1, -1, -1, -1];
+ reg i = 0;
  
 
 const var SourceSusRelAHDSR = Synth.getModulator("SourceSusRelAHDSR");
@@ -26,7 +27,7 @@ inline function copyModulatorParams(source, target)
 {
 	for(var j = 0; j < target.length; j++){
 
-    for (var i = 0; i < source.getNumAttributes(); i++)
+    for (i = 0; i < source.getNumAttributes(); i++)
     {
         target[j].setAttribute(i, source.getAttribute(i));
     }
@@ -360,7 +361,7 @@ inline function incrementRRCounter(){
 
 inline function shuffleArray(arr)
 {
-    for (var i = arr.length - 1; i > 0; i--)
+    for (i = arr.length - 1; i > 0; i--)
     {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = arr[i];
@@ -675,14 +676,27 @@ Content.getComponent("ShowSettingsBtn").setControlCallback(onShowSettingsBtnCont
 
 // dont forget to correlate the note delay with velocity in some way
 
+const var maxNotesFiltered = 128;
+const var notesFiltered = [];
+notesFiltered.reserve(maxNotesFiltered);
+
 inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
 	
-
 
 	if(notePlayed != StrummingKeyswitch.downStrumKeyswitch && notePlayed != StrummingKeyswitch.upStrumKeyswitch){
 		return false;
 	}
 	
+	for(i = 0; i < notes.length; i++){
+		if(notes[i] != -1){
+			notesFiltered.push(notes[i]);
+		}
+	}
+	
+	Console.print(notesFiltered);
+	for(i = 0; i < notesFiltered.length; i++){
+		Console.print(notesFiltered[i]);
+	}
 	Message.ignoreEvent(true);
 		
 	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch){

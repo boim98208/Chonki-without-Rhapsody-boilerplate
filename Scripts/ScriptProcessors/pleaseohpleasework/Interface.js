@@ -1,4 +1,3 @@
- var testNotes = [51, 58, 63, 66];
  const var secondChord = [50, 57, 63, 66];
  const var thirdChord = [49, 56, 61, 65];
  const var fourthChord = [47, 54, 59, 63];
@@ -6,9 +5,17 @@
  const var sixthChord = [46, 53, 56, 62];
  const var firstChord = [51, 58, 63, 66];
  
- reg testIds = [-1, -1, -1, -1, -1, -1, -1, -1];
+ 
+ const var maxNoteIds = 128;
+ reg testIds = [];
+ testIds.reserve(maxNoteIds);
  reg i = 0;
  
+ var testNotes = [];
+ testNotes.reserve(maxNoteIds);
+ 
+ testNotes.sort();
+
 
 const var SourceSusRelAHDSR = Synth.getModulator("SourceSusRelAHDSR");
 const var AllSusRelAHDSR = Synth.getAllModulators("SusRelAHDSR");
@@ -674,42 +681,61 @@ Content.getComponent("ShowSettingsBtn").setControlCallback(onShowSettingsBtnCont
 
 // Strumming engine functions
 
-// dont forget to correlate the note delay with velocity in some way
+inline function printArray(array){
+	for (i = 0; i < array.length; i++){
+		Console.print(array[i]);
+	}
+}
+
+// dont forget to correlate the note delay with velocity or cc in some way
 
 const var maxNotesFiltered = 128;
 const var notesFiltered = [];
 notesFiltered.reserve(maxNotesFiltered);
 
+const var EnableStrummingBtn = Content.getComponent("EnableStrummingBtn");
+
+var strummingEnabled = false;
+
+inline function onEnableStrummingBtnControl(component, value)
+{
+	if(value){
+		strummingEnabled = true;
+	}else{
+		strummingEnabled = false;
+	}
+};
+
+Content.getComponent("EnableStrummingBtn").setControlCallback(onEnableStrummingBtnControl);
+
+
 inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
-	
+	local noteCount = 0;
 
 	if(notePlayed != StrummingKeyswitch.downStrumKeyswitch && notePlayed != StrummingKeyswitch.upStrumKeyswitch){
 		return false;
 	}
 	
+	notes.sort();
+	
 	for(i = 0; i < notes.length; i++){
 		if(notes[i] != -1){
-			notesFiltered.push(notes[i]);
+			notesFiltered[noteCount] = notes[i];
+			noteCount++;
 		}
 	}
 	
-	Console.print(notesFiltered);
-	for(i = 0; i < notesFiltered.length; i++){
-		Console.print(notesFiltered[i]);
-	}
 	Message.ignoreEvent(true);
 		
 	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch){
-		downStrum(notes, noteVelocity);
+		downStrum(notesFiltered, noteVelocity, noteCount);
 		return true;
 	}
 	
 	if(notePlayed == StrummingKeyswitch.upStrumKeyswitch){
-		upStrum(notes, noteVelocity);
+		upStrum(notesFiltered, noteVelocity, noteCount);
 		return true;
 	}
-	
-	
 	
 }
 
@@ -735,29 +761,25 @@ inline function releaseStrumKey(noteReleased){
 
 const var fastestNoteDelay = 5;
 
-const var slowestNoteDelay = 70;
+const var slowestNoteDelay = 80;
 
-inline function downStrum(notes, noteVelocity){
+inline function downStrum(notes, noteVelocity, noteCount){
 	
 	local delayMS = linMap(noteVelocity, 1, 127, slowestNoteDelay, fastestNoteDelay);
 	
 	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
+	
 
-	for(var i = 0; i < notes.length; i++){
+	for(var i = 0; i < noteCount; i++){
 		testIds[i] = Synth.addNoteOn(1, notes[i], noteVelocity, delaySamples * i);
 	}
 }
 
-inline function upStrum(notes, noteVelocity){
+inline function upStrum(notes, noteVelocity, noteCount){
 	
-	local delayMS = linMap(noteVelocity, 0, 127, slowestNoteDelay, fastestNoteDelay);
-	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
-
-	for(var i = notes.length - 1; i >= 0; i--){
-		
-	// delaySamples * (notes.length - i) comes i starting high then going low
-		testIds[i] = Synth.addNoteOn(1, notes[i], noteVelocity, delaySamples * (notes.length - i));
-	}
+	notes.reverse();
+	printArray(notes);
+	downStrum(notes, noteVelocity, noteCount);
 }
 
 
@@ -786,25 +808,24 @@ function onNoteOn()
 	local notePlayed = Message.getNoteNumber();
 	local noteVelocity = Message.getVelocity();
 	
-	if(notePlayed == 0){
-		testNotes = secondChord;
-		}else if(notePlayed == 1){
-			testNotes = thirdChord;
-		}else if(notePlayed == 2){
-			testNotes = fourthChord;
-		}else if (notePlayed == 3){
-			testNotes = fifthChord;
-		}else if(notePlayed == 4){
-			testNotes = sixthChord;
-		}else if(notePlayed == 5){
-			testNotes = firstChord;
-		}
+	if(strummingEnabled){
+		Message.ignoreEvent(true);
+	}
 	
 	if(isAKeyswitch(notePlayed)){
 		detectKeyswitch(notePlayed, noteVelocity);
+		
+		if(articulationPlaying == 0){
+			ArticulationPlayingLabel.set("text", "Sustain");
+		}else if(articulationPlaying == 1){
+			ArticulationPlayingLabel.set("text", "Mute");
+		}else {
+			ArticulationPlayingLabel.set("text", "Loose Mute");
+		}
 	}
 	
 	if(notePlayed >= LOWESTNOTE && notePlayed <= HIGHESTNOTE){
+		testNotes.push(notePlayed);
 		changeToneWithVelocityIfEnabled(Message.getVelocity());
 	}
 	
@@ -822,16 +843,13 @@ function onNoteOn()
 		
 		
 	setRRForSamplers(RRToPlay);
-		
-	if(articulationPlaying == 0){
-		ArticulationPlayingLabel.set("text", "Sustain");
-	}else if(articulationPlaying == 1){
-		ArticulationPlayingLabel.set("text", "Mute");
-	}else {
-		ArticulationPlayingLabel.set("text", "Loose Mute");
+
+	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch || notePlayed == StrummingKeyswitch.upStrumKeyswitch){
+		Message.delayEvent(2);
 	}
 		
 	strumIfStrumKeyPressed(notePlayed, testNotes, noteVelocity);
+	
 	
 /*	if(isBetweenIncl(LOWESTNOTE, HIGHESTNOTE, notePlayed)){
 		Message.setNoteNumber(notePlayed + 2);
@@ -846,6 +864,10 @@ function onNoteOn()
 	
 	if(isAKeyswitch(notePlayed) && latchingChoiceEnabled){
 		detectKeyswitchNoLatch(latchedKeyswtich);
+	}
+	
+	if(testNotes.contains(notePlayed)){
+		testNotes.remove(notePlayed);
 	}
 	
 	releaseStrumKey(notePlayed);

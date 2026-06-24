@@ -12,14 +12,14 @@
             <Control type="ScriptButton" id="ArtificalRRsBtn" value="1.0"/>
             <Control type="ScriptSlider" id="ToneKnob" value="0.0"/>
             <Control type="ScriptButton" id="ToneVelocityBtn" value="0.0"/>
-            <Control type="ScriptButton" id="DoubleTrackingBtn" value="1.0"/>
+            <Control type="ScriptButton" id="DoubleTrackingBtn" value="0.0"/>
             <Control type="ScriptSlider" id="VibratoAmountKnob" value="0.0"/>
             <Control type="ScriptSlider" id="VibratoFrequencyKnob" value="8.5"/>
             <Control type="ScriptSlider" id="PitchBendRangeKnob" value="2.0"/>
             <Control type="ScriptSlider" id="StringSelectKnob" value="0.0"/>
             <Control type="ScriptButton" id="EnableLatchChoiceBtn" value="0.0"/>
             <Control type="ScriptButton" id="EnableStrummingBtn" value="1.0"/>
-            <Control type="ScriptButton" id="ShowSettingsBtn" value="1.0"/>
+            <Control type="ScriptButton" id="ShowSettingsBtn" value="0.0"/>
           </Content>
           <UIData>
             <ContentProperties DeviceType="Desktop">
@@ -87,7 +87,8 @@
                          itemColour="0" itemColour2="0"/>
               <Component type="ScriptFloatingTile" id="SettingsTile" x="640" y="0" width="360"
                          height="598" ContentType="CustomSettings" bgColour="4278190080"
-                         itemColour="0" itemColour2="0" Data="{&#10;  &quot;Driver&quot;: true,&#10;  &quot;Device&quot;: true,&#10;  &quot;Output&quot;: true,&#10;  &quot;BufferSize&quot;: true,&#10;  &quot;SampleRate&quot;: true,&#10;  &quot;GlobalBPM&quot;: true,&#10;  &quot;StreamingMode&quot;: true,&#10;  &quot;ScaleFactor&quot;: true,&#10;  &quot;VoiceAmountMultiplier&quot;: true,&#10;  &quot;ClearMidiCC&quot;: true,&#10;  &quot;SampleLocation&quot;: true,&#10;  &quot;DebugMode&quot;: true,&#10;  &quot;UseOpenGL&quot;: true,&#10;  &quot;ScaleFactorList&quot;: [&#10;    0.5,&#10;    0.75,&#10;    1.0,&#10;    1.25,&#10;    1.5,&#10;    2.0&#10;  ]&#10;}"/>
+                         itemColour="0" itemColour2="0" Data="{&#10;  &quot;Driver&quot;: true,&#10;  &quot;Device&quot;: true,&#10;  &quot;Output&quot;: true,&#10;  &quot;BufferSize&quot;: true,&#10;  &quot;SampleRate&quot;: true,&#10;  &quot;GlobalBPM&quot;: true,&#10;  &quot;StreamingMode&quot;: true,&#10;  &quot;ScaleFactor&quot;: true,&#10;  &quot;VoiceAmountMultiplier&quot;: true,&#10;  &quot;ClearMidiCC&quot;: true,&#10;  &quot;SampleLocation&quot;: true,&#10;  &quot;DebugMode&quot;: true,&#10;  &quot;UseOpenGL&quot;: true,&#10;  &quot;ScaleFactorList&quot;: [&#10;    0.5,&#10;    0.75,&#10;    1.0,&#10;    1.25,&#10;    1.5,&#10;    2.0&#10;  ]&#10;}"
+                         visible="0"/>
               <Component type="ScriptButton" id="ShowSettingsBtn" x="342" y="9" width="123"
                          height="31" text="Settings"/>
             </ContentProperties>
@@ -203,7 +204,7 @@
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
                 <Processor Type="SimpleGain" ID="LeftGuitarGain" Bypassed="0" Gain="0.0"
-                           Delay="0.0" Width="100.0" Balance="-100.0" InvertPolarity="0.0">
+                           Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
                       <ChildProcessors/>
@@ -1115,7 +1116,7 @@
                 <Processor Type="MidiMuter" ID="RightGuitarMute" Bypassed="0">
                   <ChildProcessors/>
                   <Content>
-                    <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                    <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
                     <Control type="ScriptButton" id="fixStuckNotes" value="0.0"/>
                   </Content>
                 </Processor>
@@ -1129,7 +1130,7 @@
             </Processor>
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
-                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="0.0"
+                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="-100.0"
                            Delay="0.0" Width="0.0" Balance="100.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">

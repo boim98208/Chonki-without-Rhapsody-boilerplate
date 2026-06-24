@@ -6,13 +6,16 @@
  const var firstChord = [51, 58, 63, 66];
  
  
- const var maxNoteIds = 128;
+ const var maxNoteIds = 8;
  reg testIds = [];
  testIds.reserve(maxNoteIds);
  reg i = 0;
  
  var testNotes = [];
  testNotes.reserve(maxNoteIds);
+ for(i = 0; i < maxNoteIds; i++){
+	 testNotes.push(-1);
+ }
  
  testNotes.sort();
 
@@ -498,7 +501,7 @@ inline function changeToneValue(value){
 	
 	// Compensation: +6dB at t=0.5, +12dB at t=1.0
 	// Two cascaded equal-power crossfades each lose ~3dB at mid-point
-	// We need to make up 6dB at 0.5 and 12dB at 1.0
+	// Need to make up 6dB at the half and 12dB at the full
 	local compensationDb;
 	if (value <= 0.5)
 	{
@@ -689,13 +692,18 @@ inline function printArray(array){
 
 // dont forget to correlate the note delay with velocity or cc in some way
 
-const var maxNotesFiltered = 128;
+const var maxNotesFiltered = 8;
 const var notesFiltered = [];
 notesFiltered.reserve(maxNotesFiltered);
+
+for(i = 0; i < maxNotesFiltered; i++){
+	notesFiltered.push(-1);
+}
 
 const var EnableStrummingBtn = Content.getComponent("EnableStrummingBtn");
 
 var strummingEnabled = false;
+var isCurrentlyStrumming = false;
 
 inline function onEnableStrummingBtnControl(component, value)
 {
@@ -708,9 +716,10 @@ inline function onEnableStrummingBtnControl(component, value)
 
 Content.getComponent("EnableStrummingBtn").setControlCallback(onEnableStrummingBtnControl);
 
+var noteCount = 0;
 
 inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
-	local noteCount = 0;
+
 
 	if(notePlayed != StrummingKeyswitch.downStrumKeyswitch && notePlayed != StrummingKeyswitch.upStrumKeyswitch){
 		return false;
@@ -721,11 +730,20 @@ inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
 	for(i = 0; i < notes.length; i++){
 		if(notes[i] != -1){
 			notesFiltered[noteCount] = notes[i];
+			
+			// remove the times noteCount gets modified please
 			noteCount++;
 		}
 	}
 	
 	Message.ignoreEvent(true);
+	
+	if(isCurrentlyStrumming){
+		releaseStrumKey(StrummingKeyswitch.downStrumKeyswitch);
+		Console.print("should have released");
+	}else{
+		isCurrentlyStrumming = true;
+	}
 		
 	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch){
 		downStrum(notesFiltered, noteVelocity, noteCount);
@@ -741,7 +759,7 @@ inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
 
 inline function releaseStrumKey(noteReleased){
 	
-
+	
 	if(noteReleased != StrummingKeyswitch.downStrumKeyswitch && noteReleased != StrummingKeyswitch.upStrumKeyswitch){
 		return false;
 	}
@@ -749,6 +767,7 @@ inline function releaseStrumKey(noteReleased){
 	for(var i = 0; i < testIds.length && testIds[i] != -1; i++){
 		Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(2));
 		
+		isCurrentlyStrumming = false;
 		/*Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(5));*/
 		
 	}
@@ -769,17 +788,28 @@ inline function downStrum(notes, noteVelocity, noteCount){
 	
 	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
 	
+	Console.print(noteCount);
 
-	for(var i = 0; i < noteCount; i++){
+//	printArray(notes);
+	for(i = maxNoteIds - noteCount; i < maxNoteIds; i++){
+		Console.print(i);
+	
 		testIds[i] = Synth.addNoteOn(1, notes[i], noteVelocity, delaySamples * i);
+		Console.print(i);
 	}
 }
 
 inline function upStrum(notes, noteVelocity, noteCount){
-	
-	notes.reverse();
-	printArray(notes);
-	downStrum(notes, noteVelocity, noteCount);
+	// reversing the notes before passing it onto downstrum
+    local temp;
+    for (var i = 0; i < noteCount / 2; i++)
+    {
+        temp = notes[i];
+        notes[i] = notes[noteCount - 1 - i];
+        notes[noteCount - 1 - i] = temp;
+    }
+    
+    downStrum(notes, noteVelocity, noteCount);
 }
 
 
@@ -790,7 +820,7 @@ Synth.startTimer(0.5);
 
 // Getting the Midi CCs in place
 
-applyCC();
+//applyCC();
 
 inline function isBetweenIncl(lowBound, highBound, num){
 	if(num >= lowBound && num <= highBound){
@@ -799,7 +829,6 @@ inline function isBetweenIncl(lowBound, highBound, num){
 		return false;
 	}
 }
-
 function onNoteOn()
 {
 
@@ -808,9 +837,6 @@ function onNoteOn()
 	local notePlayed = Message.getNoteNumber();
 	local noteVelocity = Message.getVelocity();
 	
-	if(strummingEnabled){
-		Message.ignoreEvent(true);
-	}
 	
 	if(isAKeyswitch(notePlayed)){
 		detectKeyswitch(notePlayed, noteVelocity);
@@ -825,9 +851,18 @@ function onNoteOn()
 	}
 	
 	if(notePlayed >= LOWESTNOTE && notePlayed <= HIGHESTNOTE){
-		testNotes.push(notePlayed);
-		changeToneWithVelocityIfEnabled(Message.getVelocity());
+		
+		if(strummingEnabled){
+		Message.ignoreEvent(true);
+		}
+		
+		testNotes[noteCount] = notePlayed;
+		noteCount++;
+		changeToneWithVelocityIfEnabled(noteVelocity);
+		
 	}
+	
+	strumIfStrumKeyPressed(notePlayed, testNotes, noteVelocity);
 	
 	//RR groups start on 1, so I'm incrementing RRCounter to start on 1, but RRsToGoThrough to start at 0.
 	
@@ -844,11 +879,6 @@ function onNoteOn()
 		
 	setRRForSamplers(RRToPlay);
 
-	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch || notePlayed == StrummingKeyswitch.upStrumKeyswitch){
-		Message.delayEvent(2);
-	}
-		
-	strumIfStrumKeyPressed(notePlayed, testNotes, noteVelocity);
 	
 	
 /*	if(isBetweenIncl(LOWESTNOTE, HIGHESTNOTE, notePlayed)){
@@ -859,18 +889,22 @@ function onNoteOn()
  function onNoteOff()
 {
 	local RRToPlay;
-	local notePlayed = Message.getNoteNumber();
+	local noteReleased = Message.getNoteNumber();
 	local noteVelocity = Message.getVelocity();
+	local indexOfReleasedNote;
 	
 	if(isAKeyswitch(notePlayed) && latchingChoiceEnabled){
 		detectKeyswitchNoLatch(latchedKeyswtich);
 	}
 	
-	if(testNotes.contains(notePlayed)){
-		testNotes.remove(notePlayed);
-	}
 	
-	releaseStrumKey(notePlayed);
+	releaseStrumKey(noteReleased);
+	
+	if(testNotes.contains(noteReleased)){
+		indexOfReleasedNote = testNotes.indexOf(noteReleased, 0, 0);
+		testNotes[indexOfReleasedNote] = -1;
+		noteCount--;
+	}
 	
 }
  function onController()

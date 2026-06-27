@@ -1,3 +1,5 @@
+ Synth.setFixNoteOnAfterNoteOff(true);
+ 
  const var secondChord = [50, 57, 63, 66];
  const var thirdChord = [49, 56, 61, 65];
  const var fourthChord = [47, 54, 59, 63];
@@ -15,9 +17,9 @@
  testNotes.reserve(maxNoteIds);
  for(i = 0; i < maxNoteIds; i++){
 	 testNotes.push(-1);
+	 testIds.push(-1);
  }
  
- testNotes.sort();
 
 
 const var SourceSusRelAHDSR = Synth.getModulator("SourceSusRelAHDSR");
@@ -198,6 +200,8 @@ const var EnableLatchChoiceBtn = Content.getComponent("EnableLatchChoiceBtn");
 var latchingChoiceEnabled = EnableLatchChoiceBtn.getValue();
 var latchedKeyswtich = ArticulationType.Sustain;
 
+var strummingEnabled = false;
+var isCurrentlyStrumming = false;
 
 inline function onEnableLatchChoiceBtnControl(component, value)
 {
@@ -217,7 +221,9 @@ inline function isAKeyswitch(notePlayed){
 
 inline function detectKeyswitch(notePlayed, noteVelocity){
 
-	
+	  if(isCurrentlyStrumming){
+        releaseStrumKey(StrummingKeyswitch.downStrumKeyswitch);
+    }
 	
 	if(!latchingChoiceEnabled){
 
@@ -676,7 +682,6 @@ inline function onShowSettingsBtnControl(component, value)
 		SettingsTile.set("visible", false);
 	}
 	
-	//Console.print(SettingsTile.set("visible", true));
 };
 
 Content.getComponent("ShowSettingsBtn").setControlCallback(onShowSettingsBtnControl);
@@ -702,9 +707,6 @@ for(i = 0; i < maxNotesFiltered; i++){
 
 const var EnableStrummingBtn = Content.getComponent("EnableStrummingBtn");
 
-var strummingEnabled = false;
-var isCurrentlyStrumming = false;
-
 inline function onEnableStrummingBtnControl(component, value)
 {
 	if(value){
@@ -721,37 +723,43 @@ var noteCount = 0;
 inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
 
 
+
+local indexOfNotePlaying = 0;
+
 	if(notePlayed != StrummingKeyswitch.downStrumKeyswitch && notePlayed != StrummingKeyswitch.upStrumKeyswitch){
 		return false;
 	}
 	
+	Message.ignoreEvent(true);
 	notes.sort();
+	
+	
+	// getting all the non negative notes from lowest to highest
 	
 	for(i = 0; i < notes.length; i++){
 		if(notes[i] != -1){
-			notesFiltered[noteCount] = notes[i];
+			notesFiltered[indexOfNotePlaying] = notes[i];
 			
 			// remove the times noteCount gets modified please
-			noteCount++;
+			indexOfNotePlaying++;
 		}
 	}
 	
-	Message.ignoreEvent(true);
+
 	
 	if(isCurrentlyStrumming){
 		releaseStrumKey(StrummingKeyswitch.downStrumKeyswitch);
-		Console.print("should have released");
 	}else{
 		isCurrentlyStrumming = true;
 	}
 		
 	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch){
-		downStrum(notesFiltered, noteVelocity, noteCount);
+		downStrum(notesFiltered, noteVelocity);
 		return true;
 	}
 	
 	if(notePlayed == StrummingKeyswitch.upStrumKeyswitch){
-		upStrum(notesFiltered, noteVelocity, noteCount);
+		upStrum(notesFiltered, noteVelocity);
 		return true;
 	}
 	
@@ -764,42 +772,55 @@ inline function releaseStrumKey(noteReleased){
 		return false;
 	}
 	
-	for(var i = 0; i < testIds.length && testIds[i] != -1; i++){
+	for(i = 0; i < testIds.length; i++){
+		
+		if(testIds[i] != -1){
+			
+	/*	
+	At the moment , randomizing a delayed off time seems to create hanging notes so I'll just keep with making it a super fast release
 		Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(2));
+	*/
+	
+	Synth.noteOffDelayedByEventId(testIds[i], Math.random() * Engine.getSamplesForMilliSeconds(10));
+		testIds[i] = -1;
+			}
+		}
 		
 		isCurrentlyStrumming = false;
-		/*Synth.noteOffDelayedByEventId(testIds[i], Math.randInt(0, 10) * Engine.getSamplesForMilliSeconds(5));*/
-		
-	}
+
+	Console.print("Finished releasing strum");
 	
-	for(var i = 0; i < testIds.length; i++){
-		testIds[i] = -1;
-	}
 	
 }
 
 const var fastestNoteDelay = 5;
 
-const var slowestNoteDelay = 80;
+const var slowestNoteDelay = 90;
 
-inline function downStrum(notes, noteVelocity, noteCount){
+
+
+inline function downStrum(notes, noteVelocity){
+	
+
 	
 	local delayMS = linMap(noteVelocity, 1, 127, slowestNoteDelay, fastestNoteDelay);
 	
 	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
 	
-	Console.print(noteCount);
 
-//	printArray(notes);
-	for(i = maxNoteIds - noteCount; i < maxNoteIds; i++){
-		Console.print(i);
-	
+	Console.print("Starting the down strum");
+	for(i = 0; i < noteCount && isCurrentlyStrumming; i++){
+
+	if(testIds[i] != -1){
+		Synth.noteOffByEventId(testIds[i]);
+		Console.print("should be cleaned up");
+	}
 		testIds[i] = Synth.addNoteOn(1, notes[i], noteVelocity, delaySamples * i);
-		Console.print(i);
+		
 	}
 }
 
-inline function upStrum(notes, noteVelocity, noteCount){
+inline function upStrum(notes, noteVelocity){
 	// reversing the notes before passing it onto downstrum
     local temp;
     for (var i = 0; i < noteCount / 2; i++)
@@ -809,7 +830,7 @@ inline function upStrum(notes, noteVelocity, noteCount){
         notes[noteCount - 1 - i] = temp;
     }
     
-    downStrum(notes, noteVelocity, noteCount);
+    downStrum(notes, noteVelocity);
 }
 
 
@@ -852,12 +873,14 @@ function onNoteOn()
 	
 	if(notePlayed >= LOWESTNOTE && notePlayed <= HIGHESTNOTE){
 		
+	
+		testNotes[noteCount] = notePlayed;
+		noteCount++;
+		
 		if(strummingEnabled){
 		Message.ignoreEvent(true);
 		}
 		
-		testNotes[noteCount] = notePlayed;
-		noteCount++;
 		changeToneWithVelocityIfEnabled(noteVelocity);
 		
 	}

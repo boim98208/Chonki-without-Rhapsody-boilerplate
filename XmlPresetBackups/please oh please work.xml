@@ -23,9 +23,24 @@
           </Content>
           <UIData>
             <ContentProperties DeviceType="Desktop">
-              <Component type="ScriptFloatingTile" id="fltKeyboard" x="72" y="612" ContentType="Keyboard"
-                         width="855" height="66" bgColour="4284769380" Data="{&#10;  &quot;KeyWidth&quot;: 15.0,&#10;  &quot;DisplayOctaveNumber&quot;: false,&#10;  &quot;LowKey&quot;: 12,&#10;  &quot;HiKey&quot;: 108,&#10;  &quot;CustomGraphics&quot;: false,&#10;  &quot;DefaultAppearance&quot;: true,&#10;  &quot;BlackKeyRatio&quot;: 0.699999988079071,&#10;  &quot;ToggleMode&quot;: false,&#10;  &quot;MidiChannel&quot;: 1,&#10;  &quot;UseVectorGraphics&quot;: true,&#10;  &quot;UseFlatStyle&quot;: false,&#10;  &quot;MPEKeyboard&quot;: false,&#10;  &quot;MPEStartChannel&quot;: 2,&#10;  &quot;MPEEndChannel&quot;: 16&#10;}"
-                         updateAfterInit="0"/>
+              <Component type="ScriptPanel" id="KeyboardPanel" x="20" y="560" width="960"
+                         height="165">
+                <Component type="ScriptFloatingTile" id="fltKeyboard" x="0" y="79" ContentType="Keyboard"
+                           width="891" height="72" bgColour="4284769380" Data="{&#10;  &quot;KeyWidth&quot;: 15.0,&#10;  &quot;DisplayOctaveNumber&quot;: true,&#10;  &quot;LowKey&quot;: 24,&#10;  &quot;HiKey&quot;: 127,&#10;  &quot;CustomGraphics&quot;: false,&#10;  &quot;DefaultAppearance&quot;: true,&#10;  &quot;BlackKeyRatio&quot;: 0.699999988079071,&#10;  &quot;ToggleMode&quot;: false,&#10;  &quot;MidiChannel&quot;: 1,&#10;  &quot;UseVectorGraphics&quot;: true,&#10;  &quot;UseFlatStyle&quot;: false,&#10;  &quot;MPEKeyboard&quot;: false,&#10;  &quot;MPEStartChannel&quot;: 2,&#10;  &quot;MPEEndChannel&quot;: 16&#10;}"
+                           updateAfterInit="0" parentComponent="KeyboardPanel"/>
+                <Component type="ScriptPanel" id="SustainKeyswitchTooltip" x="116" y="56"
+                           width="10" height="35" parentComponent="KeyboardPanel" itemColour="2600468479"
+                           itemColour2="0" tooltip="Sustain Keyswitch" textColour="16777215"
+                           bgColour="16777215" allowCallbacks="Clicks Only"/>
+                <Component type="ScriptPanel" id="MuteKeyswitchTooltip" x="125" y="56" width="10"
+                           height="35" parentComponent="KeyboardPanel" itemColour="4278190080"
+                           itemColour2="0" tooltip="Mute Keyswitch" textColour="16777215"
+                           bgColour="16777215" allowCallbacks="Clicks Only"/>
+                <Component type="ScriptPanel" id="LooseMuteKeyswitch" x="134" y="56" width="9"
+                           height="35" parentComponent="KeyboardPanel" itemColour="4294967295"
+                           itemColour2="0" tooltip="Loose Mute Keyswitch" textColour="16777215"
+                           bgColour="16777215" allowCallbacks="Clicks Only"/>
+              </Component>
               <Component type="ScriptPanel" id="ScriptPanel1" x="0" y="0" height="561"
                          width="1000">
                 <Component type="ScriptButton" id="ArtificalRRsBtn" x="0" y="200" text="ArtificialRRs"
@@ -43,7 +58,7 @@
                            height="143" fontSize="24.0" alignment="topLeft" parentComponent="ScriptPanel1"
                            editable="0"/>
                 <Component type="ScriptLabel" id="ArticulationPlayingLabel" x="470" y="430"
-                           fontSize="26.0" width="182" text="Sustain" parentComponent="ScriptPanel1"/>
+                           fontSize="26.0" width="182" text="Loose Mute" parentComponent="ScriptPanel1"/>
                 <Component type="ScriptButton" id="DoubleTrackingBtn" x="0" y="170" width="128"
                            height="28" parentComponent="ScriptPanel1" text="Double Tracking"
                            tooltip="Gets a guitar left and right. Great for rhythm/riff guitars"
@@ -237,7 +252,7 @@
                     <Processor Type="MidiMuter" ID="LeftGuitarLooseMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -653,7 +668,7 @@
                     <Processor Type="MidiMuter" ID="LeftGuitarSusMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -1164,7 +1179,7 @@
                     <Processor Type="MidiMuter" ID="RightGuitarLooseMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -1573,7 +1588,7 @@
                     <Processor Type="MidiMuter" ID="RightGuitarSusMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -2019,11 +2034,11 @@
     <Controller Controller="1" Channel="-1" Processor="Interface" MacroIndex="-1"
                 Start="0.0" End="3.5" FullStart="0.0" FullEnd="3.5" Skew="1.0"
                 Interval="0.01" Converter="37.nT6K8CBGgC..VEFa0U1Pu4lckIGckIG.ADPXiQWZ1UF.ADv..."
-                Attribute="VibratoAmountKnob" Inverted="0"/>
+                Attribute="ScriptLabel1" Inverted="0"/>
     <Controller Controller="2" Channel="-1" Processor="Interface" MacroIndex="-1"
                 Start="0.0" End="40.0" FullStart="0.0" FullEnd="40.0" Skew="1.0"
                 Interval="0.01" Converter="37.nT6K8CBGgC..VEFa0U1Pu4lckIGckIG.ADPXiQWZ1UF.ADv..."
-                Attribute="VibratoFrequencyKnob" Inverted="0"/>
+                Attribute="ToolTipPanel" Inverted="0"/>
   </MidiAutomation>
   <MPEData Enabled="0"/>
 </Processor>

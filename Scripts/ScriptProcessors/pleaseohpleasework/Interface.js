@@ -722,7 +722,7 @@ var noteCount = 0;
 
 inline function strumIfStrumKeyPressed(notePlayed, notes, noteVelocity){
 
-
+Message.delayEvent(1);
 
 local indexOfNotePlaying = 0;
 
@@ -788,7 +788,7 @@ inline function releaseStrumKey(noteReleased){
 		
 		isCurrentlyStrumming = false;
 
-	Console.print("Finished releasing strum");
+
 	
 	
 }
@@ -802,20 +802,20 @@ const var slowestNoteDelay = 90;
 inline function downStrum(notes, noteVelocity){
 	
 
-	
 	local delayMS = linMap(noteVelocity, 1, 127, slowestNoteDelay, fastestNoteDelay);
 	
 	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
 	
 
-	Console.print("Starting the down strum");
-	for(i = 0; i < noteCount && isCurrentlyStrumming; i++){
+	for(var j = 0; j < notes.length && isCurrentlyStrumming; j++){
 
-	if(testIds[i] != -1){
-		Synth.noteOffByEventId(testIds[i]);
+	if(testIds[j] != -1){
+		Synth.noteOffByEventId(testIds[j]);
 		Console.print("should be cleaned up");
 	}
-		testIds[i] = Synth.addNoteOn(1, notes[i], noteVelocity, delaySamples * i);
+	if(notes[j] != -1){
+		testIds[j] = Synth.addNoteOn(1, notes[j], noteVelocity, delaySamples * j);
+		}
 		
 	}
 }

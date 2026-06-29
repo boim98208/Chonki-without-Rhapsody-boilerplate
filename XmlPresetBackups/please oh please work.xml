@@ -58,7 +58,7 @@
                            height="143" fontSize="24.0" alignment="topLeft" parentComponent="ScriptPanel1"
                            editable="0"/>
                 <Component type="ScriptLabel" id="ArticulationPlayingLabel" x="470" y="430"
-                           fontSize="26.0" width="182" text="Loose Mute" parentComponent="ScriptPanel1"/>
+                           fontSize="26.0" width="182" text="Sustain" parentComponent="ScriptPanel1"/>
                 <Component type="ScriptButton" id="DoubleTrackingBtn" x="0" y="170" width="128"
                            height="28" parentComponent="ScriptPanel1" text="Double Tracking"
                            tooltip="Gets a guitar left and right. Great for rhythm/riff guitars"
@@ -252,7 +252,7 @@
                     <Processor Type="MidiMuter" ID="LeftGuitarLooseMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -668,7 +668,7 @@
                     <Processor Type="MidiMuter" ID="LeftGuitarSusMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -1179,7 +1179,7 @@
                     <Processor Type="MidiMuter" ID="RightGuitarLooseMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -1588,7 +1588,7 @@
                     <Processor Type="MidiMuter" ID="RightGuitarSusMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>

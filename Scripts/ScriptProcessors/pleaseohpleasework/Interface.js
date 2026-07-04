@@ -875,7 +875,7 @@ inline function downStrum(notesToStrum, noteVelocity, strummingDirection){
 		
 	//	indivNoteDelayRandomized = (indivNoteDelay * j) + (Math.random() - 0.5) * strumRandomizationPercent * indivNoteDelay;
 	indivNoteDelayRandomized = (indivNoteDelay * j);
-	
+	// for some reason the timing between notes don't sound like they're linearly timed
 	
 	
 		

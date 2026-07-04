@@ -20,6 +20,8 @@
             <Control type="ScriptButton" id="EnableLatchChoiceBtn" value="0.0"/>
             <Control type="ScriptButton" id="EnableStrummingBtn" value="1.0"/>
             <Control type="ScriptButton" id="ShowSettingsBtn" value="0.0"/>
+            <Control type="ScriptSliderPack" id="StrumSpeedgraph" value="-1.0" data="508......Lb8H+C6QgDPlYlk.c8nHCDWOpOPRgqGAov02DTyLCUPEtdZA8QgAFD..3XPb8nlA45QqFziBeaPrGEwAgT3PGTJb0cPEtd5AYlY1GDWONfPJbcBBgqGPHTJbYgPWOJGBgT3hHj8njhPeTXLB0Ly2HTOJ3iPrGEQBw0iJIjBWCkP35wUBEtdeIjT3VlP...aBEWOxIzGEhmPMyreB8QgBJzLyZnPJbchBEt9LJjlY.oPw0yjBU3ZWJTOJpoPT3ZmBwdzfJDovOpP6QwoBMyLpJDRg4pPeTXrBwmcwJja4IqPfw2rBI0ezJDQBVqPGtssBgm22JjZgiqPbQdtB4z45JDPpuqPxzNuBUmQ9JzYI8qPYwDvBszSAKTORIrPuT0vBEBVDKzXwVrPUQqwBczsGKTN5hrPqzaxB0AvJKzCCurPRwQyBMzGNKjMh7rPmTBzBkAJQKDWAJsPNQ3zBAzgTKjLJVsPjzn0BYAjWKDBShsPJwd1Bwy6ZKjKxusPfTO2BIA9cKDA66sP12+2BkyUgKzJZItPcz03B4.XjKD.iUtPxWl4BQNZmKzIBitPYTb5Bs.xpKT+JutPu2L6BENzsKzzS6tPUzB7Bc.LwKT9xHuPqWy7B0MNzKzy6TuPA6i8BQ.l2Kj8ZhuPn2Y9BkMn5KzxituP8ZJ+BA"/>
+            <Control type="ScriptButton" id="ScriptButton1" value="0.0"/>
           </Content>
           <UIData>
             <ContentProperties DeviceType="Desktop">
@@ -40,6 +42,14 @@
                            height="35" parentComponent="KeyboardPanel" itemColour="4294967295"
                            itemColour2="0" tooltip="Loose Mute Keyswitch" textColour="16777215"
                            bgColour="16777215" allowCallbacks="Clicks Only"/>
+                <Component type="ScriptPanel" id="DownStrumKeyswitch" x="641" y="56" width="10"
+                           height="35" parentComponent="KeyboardPanel" itemColour="4294967295"
+                           itemColour2="0" tooltip="Down Strum" textColour="16777215" bgColour="16777215"
+                           allowCallbacks="Clicks Only"/>
+                <Component type="ScriptPanel" id="UpStrumKeyswitch" x="650" y="56" width="10"
+                           height="35" parentComponent="KeyboardPanel" itemColour="4278190080"
+                           itemColour2="0" tooltip="Up Strum" textColour="16777215" bgColour="16777215"
+                           allowCallbacks="Clicks Only"/>
               </Component>
               <Component type="ScriptPanel" id="ScriptPanel1" x="0" y="0" height="561"
                          width="1000">
@@ -58,7 +68,7 @@
                            height="143" fontSize="24.0" alignment="topLeft" parentComponent="ScriptPanel1"
                            editable="0"/>
                 <Component type="ScriptLabel" id="ArticulationPlayingLabel" x="470" y="430"
-                           fontSize="26.0" width="182" text="Sustain" parentComponent="ScriptPanel1"/>
+                           fontSize="26.0" width="182" text="Loose Mute" parentComponent="ScriptPanel1"/>
                 <Component type="ScriptButton" id="DoubleTrackingBtn" x="0" y="170" width="128"
                            height="28" parentComponent="ScriptPanel1" text="Double Tracking"
                            tooltip="Gets a guitar left and right. Great for rhythm/riff guitars"
@@ -106,6 +116,10 @@
                          visible="0"/>
               <Component type="ScriptButton" id="ShowSettingsBtn" x="342" y="9" width="123"
                          height="31" text="Settings"/>
+              <Component type="ScriptSliderPack" id="StrumSpeedgraph" x="0" y="0" sliderAmount="127"
+                         max="127"/>
+              <Component type="ScriptButton" id="ScriptButton1" x="20" y="420" width="100"
+                         height="23"/>
             </ContentProperties>
           </UIData>
         </Processor>
@@ -252,7 +266,7 @@
                     <Processor Type="MidiMuter" ID="LeftGuitarLooseMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -274,7 +288,7 @@
                     <Processor Type="AHDSR" ID="SourceLooseMuteAHDSR" Bypassed="0" Monophonic="0.0"
                                Retrigger="1.0" Intensity="1.0" AttackCurve="0.0" DecayCurve="0.0"
                                Attack="0.0" AttackLevel="0.0" Hold="10.0" Decay="300.0" Sustain="0.0"
-                               Release="304.0" EcoMode="1.0">
+                               Release="122.0" EcoMode="1.0">
                       <ChildProcessors>
                         <Processor Type="ModulatorChain" ID="Attack Time" Bypassed="0" Intensity="1.0">
                           <ChildProcessors/>
@@ -668,7 +682,7 @@
                     <Processor Type="MidiMuter" ID="LeftGuitarSusMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -1017,7 +1031,7 @@
                           <Content>
                             <Control type="ScriptButton" id="TimeAttenuate" value="1.0"/>
                             <Control type="ScriptSlider" id="Time" value="4.0"/>
-                            <Control type="ScriptTable" id="TimeTable" value="0.0" data="36...............vO...v8....9C...vO...f+.....foZ7xO"/>
+                            <Control type="ScriptTable" id="TimeTable" value="0.0" data="60...............vODQDg8HtdT5iYQ1tO...v8f8nv6C...vO...v8....9iHamuO...f+.....fwJGxO"/>
                           </Content>
                         </Processor>
                       </ChildProcessors>
@@ -1085,8 +1099,8 @@
                     </Processor>
                     <Processor Type="EffectChain" ID="FX" Bypassed="0">
                       <ChildProcessors>
-                        <Processor Type="SimpleGain" ID="Simple Gain3" Bypassed="0" Gain="-7.834968566894531"
-                                   Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+                        <Processor Type="SimpleGain" ID="Simple Gain3" Bypassed="0" Gain="0.0" Delay="0.0"
+                                   Width="100.0" Balance="0.0" InvertPolarity="0.0">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
                               <ChildProcessors/>
@@ -1179,7 +1193,7 @@
                     <Processor Type="MidiMuter" ID="RightGuitarLooseMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -1588,7 +1602,7 @@
                     <Processor Type="MidiMuter" ID="RightGuitarSusMute" Bypassed="0">
                       <ChildProcessors/>
                       <Content>
-                        <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
+                        <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
                         <Control type="ScriptButton" id="fixStuckNotes" value="1.0"/>
                       </Content>
                     </Processor>
@@ -2030,15 +2044,6 @@
     <macro name="Macro 7" value="0.0" midi_cc="-1"/>
     <macro name="Macro 8" value="0.0" midi_cc="-1"/>
   </macro_controls>
-  <MidiAutomation>
-    <Controller Controller="1" Channel="-1" Processor="Interface" MacroIndex="-1"
-                Start="0.0" End="3.5" FullStart="0.0" FullEnd="3.5" Skew="1.0"
-                Interval="0.01" Converter="37.nT6K8CBGgC..VEFa0U1Pu4lckIGckIG.ADPXiQWZ1UF.ADv..."
-                Attribute="ScriptLabel1" Inverted="0"/>
-    <Controller Controller="2" Channel="-1" Processor="Interface" MacroIndex="-1"
-                Start="0.0" End="40.0" FullStart="0.0" FullEnd="40.0" Skew="1.0"
-                Interval="0.01" Converter="37.nT6K8CBGgC..VEFa0U1Pu4lckIGckIG.ADPXiQWZ1UF.ADv..."
-                Attribute="ToolTipPanel" Inverted="0"/>
-  </MidiAutomation>
+  <MidiAutomation/>
   <MPEData Enabled="0"/>
 </Processor>

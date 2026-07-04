@@ -2,6 +2,8 @@
  
  include("GlobalConstants.js");
  
+ var downStrumHeld = false;
+ var upStrumHeld = false;
  
  Synth.setFixNoteOnAfterNoteOff(true);
  
@@ -228,9 +230,6 @@ inline function isAKeyswitch(notePlayed){
 
 inline function detectKeyswitch(notePlayed, noteVelocity){
 
-	  /*if(isCurrentlyStrumming){
-        releaseStrumKey(StrummingKeyswitch.downStrumKeyswitch);
-    }*/
 	
 	if(!latchingChoiceEnabled){
 
@@ -727,6 +726,8 @@ Content.getComponent("EnableStrummingBtn").setControlCallback(onEnableStrummingB
 
 var noteCount = 0;
 
+
+
 inline function filterNotesForStrum(heldNotes, filteredNotes){
 	local indexOfNotePlaying = 0;
 	heldNotes.sort();
@@ -746,6 +747,26 @@ inline function filterNotesForStrum(heldNotes, filteredNotes){
 	
 }
 
+const var StrumSpeedGraph = Content.addSliderPack("StrumSpeedgraph", 0, 0);
+StrumSpeedGraph.set("sliderAmount", 127); // one bar per MIDI value
+StrumSpeedGraph.set("min", 0);
+StrumSpeedGraph.set("max", 127);
+
+Console.print(StrumSpeedGraph.getSliderValueAt(127));
+
+const var ScriptButton1 = Content.getComponent("ScriptButton1");
+
+
+inline function onScriptButton1Control(component, value)
+{
+	Console.print(StrumSpeedGraph.getSliderValueAt(50));
+};
+
+Content.getComponent("ScriptButton1").setControlCallback(onScriptButton1Control);
+
+
+
+
 inline function strumIfStrumKeyPressed(notePlayed, heldNotes, noteVelocity){
 
 
@@ -757,18 +778,23 @@ inline function strumIfStrumKeyPressed(notePlayed, heldNotes, noteVelocity){
 	
 	Message.ignoreEvent(true);
 	
-	if(isCurrentlyStrumming){
+/*	if(isCurrentlyStrumming){
 		releaseStrumKey(StrummingKeyswitch.downStrumKeyswitch);
+		isCurrentlyStrumming = false;
 	}else{
 		isCurrentlyStrumming = true;
-	}
+	}*/
+	
+
 		
 	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch){
+		downStrumHeld = true;
 		downStrum(notesFiltered, noteVelocity);
 		return true;
 	}
 	
 	if(notePlayed == StrummingKeyswitch.upStrumKeyswitch){
+		upStrumHeld = true;
 		upStrum(notesFiltered, noteVelocity);
 		return true;
 	}
@@ -777,10 +803,18 @@ inline function strumIfStrumKeyPressed(notePlayed, heldNotes, noteVelocity){
 
 inline function releaseStrumKey(noteReleased){
 	
-	
-	if(noteReleased != StrummingKeyswitch.downStrumKeyswitch && noteReleased != StrummingKeyswitch.upStrumKeyswitch){
+	if(noteReleased == StrummingKeyswitch.downStrumKeyswitch){
+		downStrumHeld = false;
+	}else if(noteReleased == StrummingKeyswitch.upStrumKeyswitch){
+		upStrumHeld = false;
+	}else{
 		return false;
 	}
+	
+	if(downStrumHeld || upStrumHeld){
+		return false;
+	}
+	
 	
 	for(i = 0; i < testIds.length; i++){
 		
@@ -796,6 +830,7 @@ inline function releaseStrumKey(noteReleased){
 			}
 		}
 		
+		
 		isCurrentlyStrumming = false;
 
 
@@ -808,23 +843,44 @@ const var fastestNoteDelay = 5;
 const var slowestNoteDelay = 90;
 
 
+// each individual's note in-between adds up to that strum time
 
-inline function downStrum(heldNotes, noteVelocity){
+const var fastestTotalStrumTime = 5;
+
+const var slowestTotalStrumTime = 350;
+
+
+
+inline function downStrum(notesToStrum, noteVelocity){
 	
 
-	local delayMS = linMap(noteVelocity, 1, 127, slowestNoteDelay, fastestNoteDelay);
+	local totalTimeMS = linMap(noteVelocity, 1, 127, slowestTotalStrumTime, fastestTotalStrumTime);
 	
-	local delaySamples = Engine.getSamplesForMilliSeconds(delayMS);
+	local totalTimeSamples = Engine.getSamplesForMilliSeconds(totalTimeMS);
+	local indivNoteDelay;
+	local idToRelease;
+	
+	if(noteCount > 1)
+		indivNoteDelay = totalTimeSamples/(noteCount - 1);
+	else
+		indivNoteDelay = 0;
 	
 
-	for(var j = 0; j < heldNotes.length && isCurrentlyStrumming; j++){
+	for(var j = 0; j < notesToStrum.length; j++){
 
-	if(testIds[j] != -1){
-		Synth.noteOffByEventId(testIds[j]);
-		Console.print("should be cleaned up");
-	}
-	if(heldNotes[j] != -1){
-		testIds[j] = Synth.addNoteOn(1, heldNotes[j], noteVelocity, delaySamples * j);
+
+	
+	if(notesToStrum[j] != -1){
+	
+		if(testIds[j] != -1){
+			Synth.noteOffDelayedByEventId(testIds[j],  indivNoteDelay * j - 1);
+			Console.print(indivNoteDelay * j);
+		}
+	
+		testIds[j] = Synth.addNoteOn(1, notesToStrum[j], noteVelocity, indivNoteDelay * j);
+		
+		Console.print(indivNoteDelay * j);
+		
 		}
 		
 	}
@@ -915,6 +971,7 @@ inline function individualNoteStrumRelease(noteReleased){
 	
 	
 		if(IdToRelease != -1){
+		
 			Synth.noteOffByEventId(IdToRelease);
 			testIds[indexOfNoteToRelease] = -1;
 		}
@@ -923,8 +980,8 @@ inline function individualNoteStrumRelease(noteReleased){
 	
 	// the below occurs when an indiv strum key that's higher than the currently held notes are pressed
 	
-	while(indexOfNoteToRelease >= 0){
-		
+	while(indexOfNoteToRelease > 0){
+
 	
 		indexOfNoteToRelease--;
 	
@@ -953,7 +1010,7 @@ inline function individualNoteStrumRelease(noteReleased){
 
 
 // for some reason getting all 4 timers are used error
-// Synth.startTimer(0.5);
+Synth.startTimer(0.5);
 
 
 // Getting the Midi CCs in place
@@ -1045,11 +1102,15 @@ function onNoteOn()
 	individualNoteStrumRelease(noteReleased);
 	
 	if(testNotes.contains(noteReleased)){
+		
 		indexOfReleasedNote = testNotes.indexOf(noteReleased, 0, 0);
 		testNotes[indexOfReleasedNote] = -1;
-		filterNotesForStrum(testNotes, notesFiltered);
+		
+		indexOfReleasedNote = notesFiltered.indexOf(noteReleased, 0, 0);
+		notesFiltered[indexOfReleasedNote] = -1;
+		
 		noteCount--;
-		printArray(notesFiltered);
+		
 	}
 	
 }

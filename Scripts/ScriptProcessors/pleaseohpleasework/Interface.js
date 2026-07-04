@@ -7,12 +7,6 @@
  
  Synth.setFixNoteOnAfterNoteOff(true);
  
- const var secondChord = [50, 57, 63, 66];
- const var thirdChord = [49, 56, 61, 65];
- const var fourthChord = [47, 54, 59, 63];
- const var fifthChord = [46, 53, 58, 61];
- const var sixthChord = [46, 53, 56, 62];
- const var firstChord = [51, 58, 63, 66];
  
  reg testIds = [];
  testIds.reserve(maxNoteIds);
@@ -210,7 +204,6 @@ var latchingChoiceEnabled = EnableLatchChoiceBtn.getValue();
 var latchedKeyswtich = ArticulationType.Sustain;
 
 var strummingEnabled = false;
-var isCurrentlyStrumming = false;
 
 inline function onEnableLatchChoiceBtnControl(component, value)
 {
@@ -765,6 +758,7 @@ inline function onScriptButton1Control(component, value)
 Content.getComponent("ScriptButton1").setControlCallback(onScriptButton1Control);
 
 
+var currStrummingDirection = StrummingDirections.notStrumming;
 
 
 inline function strumIfStrumKeyPressed(notePlayed, heldNotes, noteVelocity){
@@ -777,25 +771,19 @@ inline function strumIfStrumKeyPressed(notePlayed, heldNotes, noteVelocity){
 	Message.delayEvent(1);
 	
 	Message.ignoreEvent(true);
-	
-/*	if(isCurrentlyStrumming){
-		releaseStrumKey(StrummingKeyswitch.downStrumKeyswitch);
-		isCurrentlyStrumming = false;
-	}else{
-		isCurrentlyStrumming = true;
-	}*/
-	
 
 		
 	if(notePlayed == StrummingKeyswitch.downStrumKeyswitch){
 		downStrumHeld = true;
-		downStrum(notesFiltered, noteVelocity);
+		currStrummingDirection = StrummingDirections.downStrumming;
+		downStrum(notesFiltered, noteVelocity, currStrummingDirection);
 		return true;
 	}
 	
 	if(notePlayed == StrummingKeyswitch.upStrumKeyswitch){
 		upStrumHeld = true;
-		upStrum(notesFiltered, noteVelocity);
+		currStrummingDirection = StrummingDirections.upStrumming;
+		upStrum(notesFiltered, noteVelocity, currStrummingDirection);
 		return true;
 	}
 	
@@ -829,13 +817,6 @@ inline function releaseStrumKey(noteReleased){
 		testIds[i] = -1;
 			}
 		}
-		
-		
-		isCurrentlyStrumming = false;
-
-
-	
-	
 }
 
 const var fastestNoteDelay = 5;
@@ -851,33 +832,60 @@ const var slowestTotalStrumTime = 350;
 
 
 
-inline function downStrum(notesToStrum, noteVelocity){
+const var highestStrumRandomizationPercent = 0.5;
+const var lowestStrumRandomizationPercent = 0.1;
+  
+
+
+
+
+inline function downStrum(notesToStrum, noteVelocity, strummingDirection){
 	
+	local thisStrumDirection = strummingDirection;
 
 	local totalTimeMS = linMap(noteVelocity, 1, 127, slowestTotalStrumTime, fastestTotalStrumTime);
-	
 	local totalTimeSamples = Engine.getSamplesForMilliSeconds(totalTimeMS);
 	local indivNoteDelay;
+	local indivNoteDelayRandomized;
 	local idToRelease;
+	
+	local strumRandomizationPercent = linMap(noteVelocity, 1, 127, lowestStrumRandomizationPercent, highestStrumRandomizationPercent);
 	
 	if(noteCount > 1)
 		indivNoteDelay = totalTimeSamples/(noteCount - 1);
 	else
-		indivNoteDelay = 0;
+	{
 	
+		indivNoteDelay = 0;
+		
+		if(testIds[0] != -1){
+			Synth.noteOffDelayedByEventId(testIds[j],  indivNoteDelay * j - 1);
+		}
+		testIds[j] = Synth.addNoteOn(1, notesToStrum[0], noteVelocity, indivNoteDelay);
+		
+		return true;
+	}
+	// else happens when only one note is held 
 
-	for(var j = 0; j < notesToStrum.length; j++){
+	for(var j = 0; j < notesToStrum.length && currStrummingDirection == thisStrumDirection; j++){
 
 
 	
 	if(notesToStrum[j] != -1){
+		
+	//	indivNoteDelayRandomized = (indivNoteDelay * j) + (Math.random() - 0.5) * strumRandomizationPercent * indivNoteDelay;
+	indivNoteDelayRandomized = (indivNoteDelay * j);
 	
+	
+	
+		
 		if(testIds[j] != -1){
-			Synth.noteOffDelayedByEventId(testIds[j],  indivNoteDelay * j - 1);
-			Console.print(indivNoteDelay * j);
+		
+			Synth.noteOffDelayedByEventId(testIds[j],  indivNoteDelayRandomized - 1);
 		}
 	
-		testIds[j] = Synth.addNoteOn(1, notesToStrum[j], noteVelocity, indivNoteDelay * j);
+	
+		testIds[j] = Synth.addNoteOn(1, notesToStrum[j], noteVelocity, indivNoteDelayRandomized * j);
 		
 		Console.print(indivNoteDelay * j);
 		
@@ -886,7 +894,7 @@ inline function downStrum(notesToStrum, noteVelocity){
 	}
 }
 
-inline function upStrum(heldNotes, noteVelocity){
+inline function upStrum(heldNotes, noteVelocity, strummingDirection){
 	// reversing the heldNotes before passing it onto downstrum
     local temp;
     for (var i = 0; i < noteCount / 2; i++)
@@ -896,7 +904,7 @@ inline function upStrum(heldNotes, noteVelocity){
         heldNotes[noteCount - 1 - i] = temp;
     }
     
-    downStrum(heldNotes, noteVelocity);
+    downStrum(heldNotes, noteVelocity, currStrummingDirection);
 }
 
 inline function individualNoteStrum(notePlayed, noteVelocity){
@@ -1022,6 +1030,18 @@ inline function isBetweenIncl(lowBound, highBound, num){
 		return true;
 	}else{
 		return false;
+	}
+}
+
+inline function capAtLimits(lowLimit, highLimit, num){
+	if(isBetweenIncl(lowLimit, highLimit, num)){
+		return num;
+	}else{
+		if(num < lowLimit){
+			return lowLimit;
+		}else{
+			return highLimit;
+		}
 	}
 }
 function onNoteOn()

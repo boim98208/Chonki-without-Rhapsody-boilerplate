@@ -21,3 +21,9 @@ namespace StrummingKeyswitch{
 	const var lowIndivStrumKeyswitch = individualStrumKeyswitches[0];
 	const var highIndivStrumKeyswitch = individualStrumKeyswitches[maxNoteIds - 1];
 }
+
+namespace StrummingDirections{
+	const var notStrumming = 0;
+	const var downStrumming = 1;
+	const var upStrumming = 2;
+}

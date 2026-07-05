@@ -6,6 +6,8 @@ const var LOOSEMUTEKEYSWITCH = 38;
 const var HIGHESTNOTE = 92;
 const var LOWESTNOTE = 40;
 
+const var POSINF = 1/0;
+
 namespace ArticulationType{
 	const var Sustain = 0;
 	const var Mute = 1;

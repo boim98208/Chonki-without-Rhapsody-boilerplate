@@ -752,7 +752,8 @@ const var ScriptButton1 = Content.getComponent("ScriptButton1");
 
 inline function onScriptButton1Control(component, value)
 {
-	Console.print(StrumSpeedGraph.getSliderValueAt(50));
+	Console.print(noteCount);
+	printArray(testNotes);
 };
 
 Content.getComponent("ScriptButton1").setControlCallback(onScriptButton1Control);
@@ -832,8 +833,8 @@ const var slowestTotalStrumTime = 350;
 
 
 
-const var highestStrumRandomizationPercent = 0.5;
-const var lowestStrumRandomizationPercent = 0.1;
+const var fastestStrumRandomizationPercent = 0.45;
+const var slowestStrumRandomizationPercent = 0.1;
   
 
 
@@ -849,7 +850,8 @@ inline function downStrum(notesToStrum, noteVelocity, strummingDirection){
 	local indivNoteDelayRandomized;
 	local idToRelease;
 	
-	local strumRandomizationPercent = linMap(noteVelocity, 1, 127, lowestStrumRandomizationPercent, highestStrumRandomizationPercent);
+	local strumRandomizationPercent = linMap(noteVelocity, 1, 127, slowestStrumRandomizationPercent, fastestStrumRandomizationPercent);
+	
 	
 	if(noteCount > 1)
 		indivNoteDelay = totalTimeSamples/(noteCount - 1);
@@ -868,26 +870,26 @@ inline function downStrum(notesToStrum, noteVelocity, strummingDirection){
 	// else happens when only one note is held 
 
 	for(var j = 0; j < notesToStrum.length && currStrummingDirection == thisStrumDirection; j++){
-
+	// thisStrumDirection is here to stop the strum if another strum key is pressed
 
 	
 	if(notesToStrum[j] != -1){
 		
-	//	indivNoteDelayRandomized = (indivNoteDelay * j) + (Math.random() - 0.5) * strumRandomizationPercent * indivNoteDelay;
-	indivNoteDelayRandomized = (indivNoteDelay * j);
-	// for some reason the timing between notes don't sound like they're linearly timed
+		indivNoteDelayRandomized = (indivNoteDelay * j) + (Math.random() - 0.5) * strumRandomizationPercent * indivNoteDelay;
 	
-	
+	// ensure no NoteOn message has a negative timestamp
+		indivNoteDelayRandomized = capAtLimits(0, POSINF, indivNoteDelayRandomized);
+		
+		
 		
 		if(testIds[j] != -1){
 		
+			// I'm getting "undefined" parameter calls for some reason
 			Synth.noteOffDelayedByEventId(testIds[j],  indivNoteDelayRandomized - 1);
 		}
 	
-	
-		testIds[j] = Synth.addNoteOn(1, notesToStrum[j], noteVelocity, indivNoteDelayRandomized * j);
-		
-		Console.print(indivNoteDelay * j);
+		// I'm getting "undefined" parameter calls for some reason
+		testIds[j] = Synth.addNoteOn(1, notesToStrum[j], noteVelocity, indivNoteDelayRandomized);
 		
 		}
 		
@@ -1112,6 +1114,7 @@ function onNoteOn()
 	local noteReleased = Message.getNoteNumber();
 	local noteVelocity = Message.getVelocity();
 	local indexOfReleasedNote;
+	local numOfNotes = 0;
 	
 	if(isAKeyswitch(notePlayed) && latchingChoiceEnabled){
 		detectKeyswitchNoLatch(latchedKeyswtich);
@@ -1129,9 +1132,18 @@ function onNoteOn()
 		indexOfReleasedNote = notesFiltered.indexOf(noteReleased, 0, 0);
 		notesFiltered[indexOfReleasedNote] = -1;
 		
-		noteCount--;
-		
+	//	noteCount -= 1; BECAUSE OF THIS NOT WORKING I HAVE TO USE SOME CRINGE ARRAY CHECK WHYYYYY
 	}
+	
+	// please find a way to hold noteCount so you dont have to do this cringe method
+	
+	for(i = 0; i < testNotes.length; i++){
+		if(testNotes[i] != -1){
+			numOfNotes++;
+		}
+	}
+	
+	noteCount = numOfNotes;
 	
 }
  function onController()

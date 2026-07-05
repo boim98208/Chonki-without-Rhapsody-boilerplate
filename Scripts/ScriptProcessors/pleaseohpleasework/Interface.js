@@ -939,6 +939,7 @@ inline function individualNoteStrum(notePlayed, noteVelocity){
 	// the below occurs when an indiv strum key that's higher than the currently held notes are pressed
 	
 	while(indexOfNoteToPlay >= 0){
+	
 		
 	
 		if(notesFiltered[indexOfNoteToPlay] != -1){
@@ -1068,7 +1069,7 @@ function onNoteOn()
 	}
 	
 	if(notePlayed >= LOWESTNOTE && notePlayed <= HIGHESTNOTE){
-		
+		Message.delayEvent(notePlayed * 2);
 	
 		testNotes[noteCount] = notePlayed;
 		noteCount++;

@@ -12,7 +12,7 @@
             <Control type="ScriptButton" id="ArtificalRRsBtn" value="1.0"/>
             <Control type="ScriptSlider" id="ToneKnob" value="0.0"/>
             <Control type="ScriptButton" id="ToneVelocityBtn" value="0.0"/>
-            <Control type="ScriptButton" id="DoubleTrackingBtn" value="0.0"/>
+            <Control type="ScriptButton" id="DoubleTrackingBtn" value="1.0"/>
             <Control type="ScriptSlider" id="VibratoAmountKnob" value="0.0"/>
             <Control type="ScriptSlider" id="VibratoFrequencyKnob" value="8.5"/>
             <Control type="ScriptSlider" id="PitchBendRangeKnob" value="2.0"/>
@@ -232,7 +232,7 @@
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
                 <Processor Type="SimpleGain" ID="LeftGuitarGain" Bypassed="0" Gain="0.0"
-                           Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+                           Delay="0.0" Width="100.0" Balance="-100.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
                       <ChildProcessors/>
@@ -1030,7 +1030,7 @@
                           <Content>
                             <Control type="ScriptButton" id="TimeAttenuate" value="1.0"/>
                             <Control type="ScriptSlider" id="Time" value="4.0"/>
-                            <Control type="ScriptTable" id="TimeTable" value="0.0" data="60...............vODQDg8HtdT5iYQ1tO...v8f8nv6C...vO...v8....9iHamuO...f+.....fwJGxO"/>
+                            <Control type="ScriptTable" id="TimeTable" value="0.0" data="36...............vO...v8....9iHamuO...f+.....fwJGxO"/>
                           </Content>
                         </Processor>
                       </ChildProcessors>
@@ -1098,8 +1098,8 @@
                     </Processor>
                     <Processor Type="EffectChain" ID="FX" Bypassed="0">
                       <ChildProcessors>
-                        <Processor Type="SimpleGain" ID="Simple Gain3" Bypassed="0" Gain="0.0" Delay="0.0"
-                                   Width="100.0" Balance="0.0" InvertPolarity="0.0">
+                        <Processor Type="SimpleGain" ID="Simple Gain3" Bypassed="0" Gain="5.488390445709229"
+                                   Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
                           <ChildProcessors>
                             <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
                               <ChildProcessors/>
@@ -1144,7 +1144,7 @@
                 <Processor Type="MidiMuter" ID="RightGuitarMute" Bypassed="0">
                   <ChildProcessors/>
                   <Content>
-                    <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                    <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                     <Control type="ScriptButton" id="fixStuckNotes" value="0.0"/>
                   </Content>
                 </Processor>
@@ -1158,7 +1158,7 @@
             </Processor>
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
-                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="-100.0"
+                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="0.0"
                            Delay="0.0" Width="0.0" Balance="100.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">

@@ -15,6 +15,10 @@ namespace ArticulationType{
 }
 
 namespace StrummingKeyswitch{
+	
+	const var turnOnStrumModeKey = 94;
+	const var turnOffStrumModeKey = 95;
+
 	const var downStrumKeyswitch = 96;
 	const var upStrumKeyswitch = 97;
 	

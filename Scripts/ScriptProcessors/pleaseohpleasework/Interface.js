@@ -12,7 +12,7 @@
  testIds.reserve(maxNoteIds);
  reg i = 0;
  
- var testNotes = [];
+ reg testNotes = [];
  testNotes.reserve(maxNoteIds);
  for(i = 0; i < maxNoteIds; i++){
 	 testNotes.push(-1);
@@ -119,6 +119,12 @@ Engine.setKeyColour(42, Colours.withAlpha(Colours.red, 0.5));
 Engine.setKeyColour(StrummingKeyswitch.downStrumKeyswitch, Colours.withAlpha(Colours.red, 0.2)); 
 
 Engine.setKeyColour(StrummingKeyswitch.upStrumKeyswitch, Colours.withAlpha(Colours.red, 0.2)); 
+
+Engine.setKeyColour(StrummingKeyswitch.turnOnStrumModeKey, Colours.withAlpha(Colours.green, 0.2)); 
+
+Engine.setKeyColour(StrummingKeyswitch.turnOffStrumModeKey, Colours.withAlpha(Colours.green, 0.2)); 
+
+
 
 for(i = 0; 
 i < StrummingKeyswitch.individualStrumKeyswitches.length; 
@@ -689,6 +695,7 @@ Content.getComponent("ShowSettingsBtn").setControlCallback(onShowSettingsBtnCont
 // Strumming engine functions
 
 inline function printArray(array){
+
 	for (i = 0; i < array.length; i++){
 		Console.print(array[i]);
 	}
@@ -717,6 +724,16 @@ inline function onEnableStrummingBtnControl(component, value)
 
 Content.getComponent("EnableStrummingBtn").setControlCallback(onEnableStrummingBtnControl);
 
+inline function enableStrumModeIfPressed(notePlayed){
+	if(notePlayed == StrummingKeyswitch.turnOnStrumModeKey){
+		strummingEnabled = true;
+		EnableStrummingBtn.setValue(true);
+	}else if(notePlayed == StrummingKeyswitch.turnOffStrumModeKey){
+		strummingEnabled = false;
+		EnableStrummingBtn.setValue(false);
+	}
+}
+
 var noteCount = 0;
 
 
@@ -724,7 +741,6 @@ var noteCount = 0;
 inline function filterNotesForStrum(heldNotes, filteredNotes){
 	local indexOfNotePlaying = 0;
 	heldNotes.sort();
-	
 	
 	// getting all the non negative heldNotes from lowest to highest
 	
@@ -737,26 +753,8 @@ inline function filterNotesForStrum(heldNotes, filteredNotes){
 		}
 	}
 	
-	
 }
 
-const var StrumSpeedGraph = Content.addSliderPack("StrumSpeedgraph", 0, 0);
-StrumSpeedGraph.set("sliderAmount", 127); // one bar per MIDI value
-StrumSpeedGraph.set("min", 0);
-StrumSpeedGraph.set("max", 127);
-
-Console.print(StrumSpeedGraph.getSliderValueAt(127));
-
-const var ScriptButton1 = Content.getComponent("ScriptButton1");
-
-
-inline function onScriptButton1Control(component, value)
-{
-	Console.print(noteCount);
-	printArray(testNotes);
-};
-
-Content.getComponent("ScriptButton1").setControlCallback(onScriptButton1Control);
 
 
 var currStrummingDirection = StrummingDirections.notStrumming;
@@ -845,10 +843,16 @@ inline function downStrum(notesToStrum, noteVelocity, strummingDirection){
 	local thisStrumDirection = strummingDirection;
 
 	local totalTimeMS = linMap(noteVelocity, 1, 127, slowestTotalStrumTime, fastestTotalStrumTime);
+	
 	local totalTimeSamples = Engine.getSamplesForMilliSeconds(totalTimeMS);
 	local indivNoteDelay;
 	local indivNoteDelayRandomized;
 	local idToRelease;
+	
+	local randomizedNoteVelocity;
+	
+
+	
 	
 	local strumRandomizationPercent = linMap(noteVelocity, 1, 127, slowestStrumRandomizationPercent, fastestStrumRandomizationPercent);
 	
@@ -887,13 +891,25 @@ inline function downStrum(notesToStrum, noteVelocity, strummingDirection){
 			// I'm getting "undefined" parameter calls for some reason
 			Synth.noteOffDelayedByEventId(testIds[j],  indivNoteDelayRandomized - 1);
 		}
-	
-		// I'm getting "undefined" parameter calls for some reason
-		testIds[j] = Synth.addNoteOn(1, notesToStrum[j], noteVelocity, indivNoteDelayRandomized);
+		
+		randomizedNoteVelocity = noteVelocity + randomAddOrSub(20);
+		
+		randomizedNoteVelocity = capAtLimits(0, 127, randomizedNoteVelocity);
+		
+		testIds[j] = Synth.addNoteOn(1, notesToStrum[j],  randomizedNoteVelocity, indivNoteDelayRandomized);
 		
 		}
 		
 	}
+}
+
+
+// returns a random number from the negative of the argument to the positive of the argument
+inline function randomAddOrSub(deviation){
+	
+	
+
+	return (Math.random() - 0.5) * deviation * 2;
 }
 
 inline function upStrum(heldNotes, noteVelocity, strummingDirection){
@@ -1069,9 +1085,9 @@ function onNoteOn()
 	}
 	
 	if(notePlayed >= LOWESTNOTE && notePlayed <= HIGHESTNOTE){
-		Message.delayEvent(notePlayed * 2);
 	
-		testNotes[noteCount] = notePlayed;
+	// This index is from testNotes being sorted, leaving -1 notes earlier in the array and you want to replace -1 notes when adding notes
+		testNotes[testNotes.length - noteCount - 1] = notePlayed;
 		noteCount++;
 		filterNotesForStrum(testNotes, notesFiltered);
 		
@@ -1083,7 +1099,7 @@ function onNoteOn()
 		
 	}
 	
-	
+	enableStrumModeIfPressed(notePlayed);
 	strumIfStrumKeyPressed(notePlayed, testNotes, noteVelocity);
 	individualNoteStrum(notePlayed, noteVelocity);
 	

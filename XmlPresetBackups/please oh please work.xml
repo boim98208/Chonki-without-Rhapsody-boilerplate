@@ -275,9 +275,9 @@
                        PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                        SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                        OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                       NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                       Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                       Group7Table="" SampleMapID="loosemute">
+                       NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                       Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                       Group5Table="" Group6Table="" Group7Table="" SampleMapID="loosemute">
               <ChildProcessors>
                 <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                   <ChildProcessors>
@@ -404,9 +404,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="mute_string8">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="mute_string8">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -502,9 +502,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="mute_string3">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="mute_string3">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -600,9 +600,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="mute_string8-4">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="mute_string8-4">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -724,9 +724,9 @@
                            PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sustain_string8">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sustain_string8">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -821,9 +821,9 @@
                            PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sus_string3">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sus_string3">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -918,9 +918,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sustain_string8-4">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sustain_string8-4">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1045,9 +1045,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sustain_rel_string8-4">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sustain_rel_string8-4 - Copy">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1210,9 +1210,9 @@
                        IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                        SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                        OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                       NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                       Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                       Group7Table="" SampleMapID="loosemute">
+                       NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                       Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                       Group5Table="" Group6Table="" Group7Table="" SampleMapID="loosemute">
               <ChildProcessors>
                 <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                   <ChildProcessors>
@@ -1332,9 +1332,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="mute_string3">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="mute_string3">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1430,9 +1430,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="mute_string8">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="mute_string8">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1528,9 +1528,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="mute_string8-4">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="mute_string8-4">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1652,9 +1652,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sustain_string8">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sustain_string8">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1750,9 +1750,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sus_string3">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sus_string3">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1848,9 +1848,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sustain_string8-4">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sustain_string8-4">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>
@@ -1945,9 +1945,9 @@
                            IconColour="0" PreloadSize="8192.0" BufferSize="4096.0" VoiceAmount="256.0"
                            SamplerRepeatMode="3.0" RRGroupAmount="4.0" PitchTracking="1.0"
                            OneShot="0.0" CrossfadeGroups="0.0" Purged="0.0" Reversed="0.0"
-                           NumChannels="1" UseStaticMatrix="0.0" Group0Table="" Group1Table=""
-                           Group2Table="" Group3Table="" Group4Table="" Group5Table="" Group6Table=""
-                           Group7Table="" SampleMapID="sustain_rel_string8-4">
+                           NumChannels="1" UseStaticMatrix="0.0" LowPassEnvelopeOrder="0.0"
+                           Group0Table="" Group1Table="" Group2Table="" Group3Table="" Group4Table=""
+                           Group5Table="" Group6Table="" Group7Table="" SampleMapID="sustain_rel_string8-4 - Copy">
                   <ChildProcessors>
                     <Processor Type="MidiProcessorChain" ID="Midi Processor" Bypassed="0">
                       <ChildProcessors>

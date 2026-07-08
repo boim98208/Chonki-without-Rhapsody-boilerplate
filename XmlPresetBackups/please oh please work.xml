@@ -10,18 +10,18 @@
           <ChildProcessors/>
           <Content>
             <Control type="ScriptSlider" id="ToneKnob" value="0.0"/>
-            <Control type="ScriptButton" id="ToneVelocityBtn" value="0.0"/>
-            <Control type="ScriptButton" id="DoubleTrackingBtn" value="0.0"/>
-            <Control type="ScriptSlider" id="VibratoAmountKnob" value="0.0"/>
-            <Control type="ScriptSlider" id="VibratoFrequencyKnob" value="8.920000076293945"/>
+            <Control type="ScriptButton" id="DoubleTrackingBtn" value="1.0"/>
+            <Control type="ScriptSlider" id="VibratoAmountKnob" value="2.0"/>
+            <Control type="ScriptSlider" id="VibratoFrequencyKnob" value="0.0"/>
             <Control type="ScriptSlider" id="StringSelectKnob" value="0.0"/>
-            <Control type="ScriptButton" id="ScriptButton1" value="0.0"/>
-            <Control type="ScriptButton" id="ArtificalRRsBtn" value="1.0"/>
+            <Control type="ScriptButton" id="ViewAdvancedPnlBtn" value="0.0"/>
+            <Control type="ScriptButton" id="ToneVelocityBtn" value="0.0"/>
+            <Control type="ScriptButton" id="ArtificalRRsBtn" value="0.0"/>
             <Control type="ScriptSlider" id="PitchBendRangeKnob" value="2.0"/>
             <Control type="ScriptButton" id="EnableLatchChoiceBtn" value="0.0"/>
             <Control type="ScriptButton" id="EnableStrummingBtn" value="0.0"/>
             <Control type="ScriptButton" id="ShowSettingsBtn" value="0.0"/>
-            <Control type="ScriptSliderPack" id="StrumSpeedgraph" value="-1.0" data="508......Lb8H+C6QgDPlYlk.c8nHCDWOpOPRgqGAov02DTyLCUPEtdZA8QgAFD..3XPb8nlA45QqFziBeaPrGEwAgT3PGTJb0cPEtd5AYlY1GDWONfPJbcBBgqGPHTJbYgPWOJGBgT3hHj8njhPeTXLB0Ly2HTOJ3iPrGEQBw0iJIjBWCkP35wUBEtdeIjT3VlP...aBEWOxIzGEhmPMyreB8QgBJzLyZnPJbchBEt9LJjlY.oPw0yjBU3ZWJTOJpoPT3ZmBwdzfJDovOpP6QwoBMyLpJDRg4pPeTXrBwmcwJja4IqPfw2rBI0ezJDQBVqPGtssBgm22JjZgiqPbQdtB4z45JDPpuqPxzNuBUmQ9JzYI8qPYwDvBszSAKTORIrPuT0vBEBVDKzXwVrPUQqwBczsGKTN5hrPqzaxB0AvJKzCCurPRwQyBMzGNKjMh7rPmTBzBkAJQKDWAJsPNQ3zBAzgTKjLJVsPjzn0BYAjWKDBShsPJwd1Bwy6ZKjKxusPfTO2BIA9cKDA66sP12+2BkyUgKzJZItPcz03B4.XjKD.iUtPxWl4BQNZmKzIBitPYTb5Bs.xpKT+JutPu2L6BENzsKzzS6tPUzB7Bc.LwKT9xHuPqWy7B0MNzKzy6TuPA6i8BQ.l2Kj8ZhuPn2Y9BkMn5KzxituP8ZJ+BA"/>
+            <Control type="ScriptSliderPack" id="StrumSpeedgraph" value="-1.0" data="508....f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+....9C...3O...f+."/>
           </Content>
           <UIData>
             <ContentProperties DeviceType="Desktop">
@@ -67,9 +67,6 @@
               <Component type="ScriptPanel" id="MainPanel" x="0" y="0" height="561" width="1000">
                 <Component type="ScriptSlider" id="ToneKnob" x="0" y="0" text="Grit" tooltip="Adds a &quot;bite&quot; to the sound. Change this mid-play for more dynamics"
                            parentComponent="MainPanel" isPluginParameter="1" pluginParameterName="Grit"/>
-                <Component type="ScriptButton" id="ToneVelocityBtn" x="0" y="60" text="Change Grit with velocity"
-                           width="163" tooltip="Change tone via velocity. Helpful with note-heavy melodies"
-                           parentComponent="MainPanel"/>
                 <Component type="ScriptLabel" id="ScriptLabel1" x="380" y="430" width="100"
                            height="26" text="Playing:  " alignment="topLeft" fontSize="26.0"
                            parentComponent="MainPanel"/>
@@ -84,26 +81,29 @@
                            tooltip="Gets a guitar left and right. Great for rhythm/riff guitars"
                            deferControlCallback="1" defaultValue="1.0" isPluginParameter="1"
                            pluginParameterName="Double Tracking"/>
-                <Component type="ScriptSlider" id="VibratoAmountKnob" x="0" y="100" text="Vibrato Depth"
+                <Component type="ScriptSlider" id="VibratoAmountKnob" x="0" y="80" text="Vibrato Depth"
                            tooltip="Emulates vibrato ranging from 0 to 3.5 semitones. Change this during lead playing for expression. Default mapped to CC1/Modwheel"
                            isPluginParameter="1" pluginParameterName="Vibrato Depth" parentComponent="MainPanel"
                            height="50" width="163" max="3.5" suffix=" semitones" defaultValue="2.0"
                            middlePosition="1.0"/>
-                <Component type="ScriptSlider" id="VibratoFrequencyKnob" x="170" y="100"
+                <Component type="ScriptSlider" id="VibratoFrequencyKnob" x="170" y="80"
                            text="Vibrato Frequency" tooltip="Controls frequency of vibrato. Default mapped to CC2"
                            isPluginParameter="1" pluginParameterName="Vibrato Frequency"
                            parentComponent="MainPanel" height="50" width="165" mode="Frequency"
                            max="40.0" suffix=" Hz" middlePosition="8.0"/>
                 <Component type="ScriptSlider" id="StringSelectKnob" x="0" y="160" text="All Strings Enabled"
-                           tooltip="&quot;All Strings&quot; sounds the most coherent with wide rhythms. &quot;Low String&quot; allows for mellow low tuned riffs"
+                           tooltip="&quot;All Strings&quot; sounds the most coherent with wide rhythms. &quot;Low String&quot; allows mellow low tuned riffs"
                            isPluginParameter="1" pluginParameterName="String Selection"
                            parentComponent="MainPanel" height="50" width="178" stepSize="1.0"
                            mouseSensitivity="0.2000000029802322"/>
-                <Component type="ScriptButton" id="ScriptButton1" x="148" y="230" width="100"
-                           height="28" parentComponent="MainPanel" text="Advanced"/>
+                <Component type="ScriptButton" id="ViewAdvancedPnlBtn" x="148" y="230" width="100"
+                           height="28" parentComponent="MainPanel" text="Advanced" tooltip="View advanced options"/>
                 <Component type="ScriptPanel" id="AdvancedPanel" x="0" y="433" width="372"
                            height="127" parentComponent="MainPanel" itemColour="0" itemColour2="0"
-                           textColour="16777215" bgColour="16777215">
+                           textColour="16777215" bgColour="16777215" visible="0">
+                  <Component type="ScriptButton" id="ToneVelocityBtn" x="210" y="67" text="Change Grit with velocity"
+                             width="163" tooltip="Change tone via velocity. Helpful with note-heavy melodies"
+                             parentComponent="AdvancedPanel"/>
                   <Component type="ScriptButton" id="ArtificalRRsBtn" x="230" y="0" text="ArtificialRRs"
                              tooltip="Less &quot;machine-gunning&quot; in exchange for slight inconsistency"
                              parentComponent="AdvancedPanel" isPluginParameter="1" pluginParameterName="Artifical RoundRobins"/>
@@ -251,7 +251,7 @@
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
                 <Processor Type="SimpleGain" ID="LeftGuitarGain" Bypassed="0" Gain="0.0"
-                           Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+                           Delay="0.0" Width="100.0" Balance="-100.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
                       <ChildProcessors/>
@@ -338,8 +338,8 @@
                                Bipolar="1" UseTable="0.0" RandomTableData="">
                       <ChildProcessors/>
                     </Processor>
-                    <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                               Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                    <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                               Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -459,8 +459,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -557,8 +557,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -655,8 +655,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -784,8 +784,8 @@
                                    Inverted="0" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -881,8 +881,8 @@
                                    Inverted="1" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -978,8 +978,8 @@
                                    Inverted="0" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1106,8 +1106,8 @@
                                    Inverted="0" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1171,7 +1171,7 @@
                 <Processor Type="MidiMuter" ID="RightGuitarMute" Bypassed="0">
                   <ChildProcessors/>
                   <Content>
-                    <Control type="ScriptButton" id="ignoreButton" value="1.0"/>
+                    <Control type="ScriptButton" id="ignoreButton" value="0.0"/>
                     <Control type="ScriptButton" id="fixStuckNotes" value="0.0"/>
                   </Content>
                 </Processor>
@@ -1185,7 +1185,7 @@
             </Processor>
             <Processor Type="EffectChain" ID="FX" Bypassed="0">
               <ChildProcessors>
-                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="-100.0"
+                <Processor Type="SimpleGain" ID="RightGuitarGain" Bypassed="0" Gain="0.0"
                            Delay="0.0" Width="0.0" Balance="100.0" InvertPolarity="0.0">
                   <ChildProcessors>
                     <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
@@ -1265,8 +1265,8 @@
                                Bipolar="1" UseTable="0.0" RandomTableData="">
                       <ChildProcessors/>
                     </Processor>
-                    <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                               Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                    <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                               Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1387,8 +1387,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1485,8 +1485,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1583,8 +1583,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1707,8 +1707,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1805,8 +1805,8 @@
                                    Bipolar="1" UseTable="0.0" RandomTableData="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -1908,8 +1908,8 @@
                                    Inverted="0" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -2006,8 +2006,8 @@
                                    Inverted="0" TableData="" Connection="">
                           <ChildProcessors/>
                         </Processor>
-                        <Processor Type="LFO" ID="VibratoLFO16" Bypassed="0" Intensity="0.0" Bipolar="0"
-                                   Frequency="8.920000076293945" FadeIn="3000.0" WaveformType="1.0"
+                        <Processor Type="LFO" ID="VibratoLFO16" Bypassed="0" Intensity="0.1666666716337204"
+                                   Bipolar="0" Frequency="0.0" FadeIn="3000.0" WaveformType="1.0"
                                    Legato="1.0" TempoSync="0.0" SmoothingTime="20.0" LoopEnabled="1.0"
                                    PhaseOffset="0.0" SyncToMasterClock="0.0" IgnoreNoteOn="0.0"
                                    CustomWaveform="72...............vOihhB9....9C...3Ogfff9...........O4it9....9C.....43339.........vO...f+....9C...vO"
@@ -2080,9 +2080,13 @@
   </macro_controls>
   <MidiAutomation>
     <Controller Controller="1" Channel="-1" Processor="Interface" MacroIndex="-1"
-                Start="0.0" End="3.5" FullStart="0.0" FullEnd="3.5" Skew="0.5532947556651122"
-                Interval="0.01" Converter="37.nT6K8CBGgC..VEFa0U1Pu4lckIGckIG.ADPXiQWZ1UF.ADf..."
-                Attribute="ArticulationPlayingLabel" Inverted="0"/>
+                Start="0.0" End="3.5" FullStart="0.0" FullEnd="3.5" Skew="1.0"
+                Interval="0.01" Converter="37.nT6K8CBGgC..VEFa0U1Pu4lckIGckIG.ADPXiQWZ1UF.ADv..."
+                Attribute="VibratoAmountKnob" Inverted="0"/>
+    <Controller Controller="2" Channel="-1" Processor="Interface" MacroIndex="-1"
+                Start="0.0" End="40.0" FullStart="0.0" FullEnd="40.0" Skew="1.0"
+                Interval="0.01" Converter="37.nT6K8CBGgC..VEFa0U1Pu4lckIGckIG.ADPXiQWZ1UF.ADv..."
+                Attribute="VibratoFrequencyKnob" Inverted="0"/>
   </MidiAutomation>
   <MPEData Enabled="0"/>
 </Processor>

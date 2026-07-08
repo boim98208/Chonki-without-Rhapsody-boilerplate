@@ -384,8 +384,8 @@ inline function shuffleArray(arr)
 {
     for (i = arr.length - 1; i > 0; i--)
     {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = arr[i];
+        local j = Math.floor(Math.random() * (i + 1));
+        local temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
@@ -867,7 +867,10 @@ inline function downStrum(notesToStrum, noteVelocity, strummingDirection){
 		if(testIds[0] != -1){
 			Synth.noteOffDelayedByEventId(testIds[j],  indivNoteDelay * j - 1);
 		}
+		
+		if(notesToStrum[0] != -1){
 		testIds[j] = Synth.addNoteOn(1, notesToStrum[0], noteVelocity, indivNoteDelay);
+		}
 		
 		return true;
 	}
@@ -1040,9 +1043,34 @@ inline function individualNoteStrumRelease(noteReleased){
 Synth.startTimer(0.5);
 
 
+
+
+const var AdvancedPanel = Content.getComponent("AdvancedPanel");
+
+const var ViewAdvancedPnlBtn = Content.getComponent("ViewAdvancedPnlBtn");
+
+AdvancedPanel.set("visible", false);
+
+ViewAdvancedPnlBtn.setValue(0);
+
+inline function onViewAdvancedPnlBtnControl(component, value)
+{
+	if(value){
+		AdvancedPanel.set("visible", true);
+	}else{
+		AdvancedPanel.set("visible", false);
+	}
+};
+
+Content.getComponent("ViewAdvancedPnlBtn").setControlCallback(onViewAdvancedPnlBtnControl);
+
+
+
+
+
 // Getting the Midi CCs in place
 
-//applyCC();
+applyCC();
 
 inline function isBetweenIncl(lowBound, highBound, num){
 	if(num >= lowBound && num <= highBound){

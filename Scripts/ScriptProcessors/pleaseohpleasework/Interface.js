@@ -34,6 +34,9 @@ const var AllSusAHDSR = Synth.getAllModulators("SusAHDSR");
 const var SourceLooseMuteAHDSR = Synth.getModulator("SourceLooseMuteAHDSR");
 const var AllLooseMuteAHDSR = Synth.getAllModulators("LooseMuteAHDSR");
 
+const var SourceMuteADHSR = Synth.getModulator("SourceMuteAHDSR");
+const var AllMuteADHSR = Synth.getAllModulators("MuteAHDSR");
+
 inline function copyModulatorParams(source, target)
 {
 	for(var j = 0; j < target.length; j++){
@@ -49,6 +52,8 @@ inline function copyModulatorParams(source, target)
 copyModulatorParams(SourceSusRelAHDSR, AllSusRelAHDSR);
 
 copyModulatorParams(SourceSusAHDSR, AllSusAHDSR);
+
+copyModulatorParams(SourceMuteADHSR, AllMuteADHSR);
 
 
 Content.makeFrontInterface(1000, 710);
@@ -98,11 +103,11 @@ const var String3MuteMute = Synth.getMidiProcessor("String3MuteMute");
 */
 
 
-const var String3SusSamplerRight = Synth.getChildSynth("String3SusSamplerRight");
-const var String8MuteSamplerRight = Synth.getChildSynth("String8MuteSamplerRight");
-const var String8SusSamplerRight = Synth.getChildSynth("String8SusSamplerRight");
-const var String3MuteSamplerRight = Synth.getChildSynth("String3MuteSamplerRight");
-const var LooseMuteSamplerRight = Synth.getChildSynth("LooseMuteSamplerRight");
+const var String3SusSamplerRight = Synth.getSampler("String3SusSamplerRight");
+const var String8MuteSamplerRight = Synth.getSampler("String8MuteSamplerRight");
+const var String8SusSamplerRight = Synth.getSampler("String8SusSamplerRight");
+const var String3MuteSamplerRight = Synth.getSampler("String3MuteSamplerRight");
+const var LooseMuteSamplerRight = Synth.getSampler("LooseMuteSamplerRight");
 
 //sus is 0, mute is 1, loose is 2
 var articulationPlaying = 0;
@@ -608,6 +613,7 @@ Content.getComponent("VibratoAmountKnob").setControlCallback(onVibratoAmountKnob
 
 
 
+
 inline function onVibratoFrequencyKnobControl(component, value)
 {
 	changeVibratoLFOFrequency(value, VibratoLFOModulators);
@@ -737,6 +743,26 @@ inline function enableStrumModeIfPressed(notePlayed){
 var noteCount = 0;
 
 
+inline function onResetStrummingNotesControl(component, value)
+{
+	for(i = 0; i < maxNoteIds; i++){
+		testNotes[i] = -1;
+		notesFiltered[i] = -1;
+	}
+};
+
+Content.getComponent("ResetStrummingNotes").setControlCallback(onResetStrummingNotesControl);
+
+
+
+const var NoteLabels = [Content.getComponent("Note0Label"),
+                        Content.getComponent("Note1Label"),
+                        Content.getComponent("Note2Label"),
+                        Content.getComponent("Note3Label"),
+                        Content.getComponent("Note4Label"),
+                        Content.getComponent("Note5Label")];
+
+
 
 inline function filterNotesForStrum(heldNotes, filteredNotes){
 	local indexOfNotePlaying = 0;
@@ -748,9 +774,17 @@ inline function filterNotesForStrum(heldNotes, filteredNotes){
 		if(heldNotes[i] != -1){
 			filteredNotes[indexOfNotePlaying] = heldNotes[i];
 			
-			// remove the times noteCount gets modified please
 			indexOfNotePlaying++;
 		}
+	}
+	
+	while(indexOfNotePlaying < filteredNotes.length){
+		filteredNotes[indexOfNotePlaying] = -1;
+		indexOfNotePlaying++;
+	}
+	
+	for(i = 0; i < NoteLabels.length; i++){
+		NoteLabels[i].set("text", filteredNotes[i]);
 	}
 	
 }
@@ -941,7 +975,7 @@ inline function individualNoteStrum(notePlayed, noteVelocity){
 	}
 	
 	indexOfNoteToPlay = notePlayed - StrummingKeyswitch.lowIndivStrumKeyswitch;
-	
+
 	
 	if(notesFiltered[indexOfNoteToPlay] != -1){
 	noteToPlay = notesFiltered[indexOfNoteToPlay];
@@ -958,8 +992,9 @@ inline function individualNoteStrum(notePlayed, noteVelocity){
 	// the below occurs when an indiv strum key that's higher than the currently held notes are pressed
 	
 	while(indexOfNoteToPlay >= 0){
-	
 		
+		// Console.print("are you going here");
+	
 	
 		if(notesFiltered[indexOfNoteToPlay] != -1){
 			noteToPlay = notesFiltered[indexOfNoteToPlay];
@@ -1169,18 +1204,14 @@ function onNoteOn()
 	releaseStrumKey(noteReleased);
 	individualNoteStrumRelease(noteReleased);
 	
-	if(testNotes.contains(noteReleased)){
-		
-		indexOfReleasedNote = testNotes.indexOf(noteReleased, 0, 0);
-		testNotes[indexOfReleasedNote] = -1;
-		
-		indexOfReleasedNote = notesFiltered.indexOf(noteReleased, 0, 0);
-		notesFiltered[indexOfReleasedNote] = -1;
-		
-	//	noteCount -= 1; BECAUSE OF THIS NOT WORKING I HAVE TO USE SOME CRINGE ARRAY CHECK WHYYYYY
-	}
+if(testNotes.contains(noteReleased)){
+    indexOfReleasedNote = testNotes.indexOf(noteReleased, 0, 0);
+    testNotes[indexOfReleasedNote] = -1;
+    noteCount--;
+    filterNotesForStrum(testNotes, notesFiltered); // keep notesFiltered in sync
+}
 	
-	// please find a way to hold noteCount so you dont have to do this cringe method
+	/*
 	
 	for(i = 0; i < testNotes.length; i++){
 		if(testNotes[i] != -1){
@@ -1188,7 +1219,7 @@ function onNoteOn()
 		}
 	}
 	
-	noteCount = numOfNotes;
+	noteCount = numOfNotes;*/
 	
 }
  function onController()
